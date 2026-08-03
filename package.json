@@ -1,5 +1,5 @@
 {
-  "name": "shipcrew",
+  "name": "@solvemotive/shipcrew-ai",
   "version": "1.0.0",
   "description": "The ultimate AI dev team for Cursor & Claude Code. Stop prompting. Command a crew.",
   "keywords": [
@@ -9,6 +9,7 @@
     "subagents",
     "dev-team",
     "shipcrew",
+    "shipcrew-ai",
     "claude",
     "cursor-rules"
   ],
@@ -21,10 +22,11 @@
     "url": "git+https://github.com/solvemotive/shipcrew.git"
   },
   "license": "MIT",
-  "author": "shipcrew",
+  "author": "SolveMotive",
   "type": "commonjs",
   "bin": {
-    "shipcrew": "bin/cli.js"
+    "shipcrew": "bin/cli.js",
+    "shipcrew-ai": "bin/cli.js"
   },
   "files": [
     "bin/",
@@ -43,5 +45,8 @@
   "scripts": {
     "init": "node bin/cli.js init",
     "test": "node --test test/*.test.js"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

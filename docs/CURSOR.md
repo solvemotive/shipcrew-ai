@@ -5,9 +5,9 @@ Use shipcrew agents natively in Cursor via `.cursor/agents/` and the always-on r
 ## Install
 
 ```bash
-npx shipcrew init
+npx @solvemotive/shipcrew-ai init
 # or pick a crew
-npx shipcrew init saas-crew
+npx @solvemotive/shipcrew-ai init saas-crew
 ```
 
 This copies agents into `.cursor/agents/` and installs `shipcrew.mdc`.

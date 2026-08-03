@@ -30,7 +30,7 @@ Write-Host ""
 Push-Location $InstallDir
 try {
   if (Get-Command npx -ErrorAction SilentlyContinue) {
-    npx --yes shipcrew init $Crew --yes
+    npx --yes @solvemotive/shipcrew-ai init $Crew --yes
   } else {
     Write-Host "npx is required to install shipcrew." -ForegroundColor Red
     exit 1

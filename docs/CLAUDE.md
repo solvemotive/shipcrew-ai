@@ -5,8 +5,8 @@ Use shipcrew as Claude Code subagents under `.claude/agents/` plus slash command
 ## Install
 
 ```bash
-npx shipcrew init
-npx shipcrew init ship-crew --force
+npx @solvemotive/shipcrew-ai init
+npx @solvemotive/shipcrew-ai init ship-crew --force
 ```
 
 Agents land in `.claude/agents/`. Commands land in `.claude/commands/`.

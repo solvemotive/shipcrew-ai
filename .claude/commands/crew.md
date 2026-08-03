@@ -16,9 +16,9 @@ Help the user work with their installed **shipcrew** agents.
 2. If the user names a goal, recommend the right crew member(s) with a one-line why.
 3. If the user asks to install/switch crews, remind them:
    ```bash
-   npx shipcrew init
-   npx shipcrew init saas-crew
-   npx shipcrew list
+   npx @solvemotive/shipcrew-ai init
+   npx @solvemotive/shipcrew-ai init saas-crew
+   npx @solvemotive/shipcrew-ai list
    ```
 4. For multi-step work, recommend: `use @captain and …` or `/ship …`.
 5. Summarize team presets: `saas-crew`, `indie-crew`, `bug-hunt-crew`, `ship-crew`, `launch-crew`.

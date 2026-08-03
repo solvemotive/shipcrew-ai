@@ -97,5 +97,5 @@ Customize Notes column with real paths (e.g. “API in `apps/api`”, “UI in `
 6. Never put secrets in CLAUDE.md — only variable names.
 7. Keep the section concise enough for agents to read every session.
 8. If stack is ambiguous (polyglot), document primary app vs secondary.
-9. After major installs (`npx shipcrew init`), re-run detection.
+9. After major installs (`npx @solvemotive/shipcrew-ai init`), re-run detection.
 10. Tell Captain when Cursor/Claude agent folders are missing and init is needed.

@@ -35,7 +35,7 @@ echo ""
 
 if command -v npx >/dev/null 2>&1; then
   cd "$INSTALL_DIR"
-  npx --yes shipcrew init "$CREW" --yes
+  npx --yes @solvemotive/shipcrew-ai init "$CREW" --yes
 else
   TMP=$(mktemp -d)
   trap 'rm -rf "$TMP"' EXIT
