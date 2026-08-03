@@ -1,55 +1,87 @@
 # shipcrew
 
-[![shipcrew](https://img.shields.io/badge/shipcrew-ready-0ea5e9?style=flat-square)](https://github.com/solvemotive/shipcrew-ai)
-
 [![License: MIT](https://img.shields.io/badge/license-MIT-green?style=flat-square)](./LICENSE)
-[![npx](https://img.shields.io/badge/npx-@solvemotive/shipcrew--ai-black?style=flat-square)](https://github.com/solvemotive/shipcrew-ai#quick-start)
+[![npx](https://img.shields.io/badge/npx-github%3Asolvemotive%2Fshipcrew--ai-black?style=flat-square)](https://github.com/solvemotive/shipcrew-ai#quick-start)
 [![Cursor](https://img.shields.io/badge/Cursor-compatible-0A66C2?style=flat-square&logo=cursor&logoColor=white)](./docs/CURSOR.md)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-compatible-D97706?style=flat-square)](./docs/CLAUDE.md)
 [![GitHub stars](https://img.shields.io/github/stars/solvemotive/shipcrew-ai?style=flat-square&logo=github)](https://github.com/solvemotive/shipcrew-ai)
 
-**The AI crew that actually ships. For Cursor & Claude Code.**
+# Stop prompting. Command a crew.
 
-> Stop prompting. Command a crew.
-
-One command installs a full company of specialized AI agents that work natively in **Cursor** (`.cursor/rules`, `.cursor/agents`) and **Claude Code** (`.claude/agents`).
-
-## Quick start
-
-**1. Initialize shipcrew in your project**
-
-Works today from GitHub (no npm publish required):
+**shipcrew** is the AI dev team for **Cursor** and **Claude Code** — sixteen specialized agents, one Captain, and presets that match how real products ship.
 
 ```bash
 npx --yes github:solvemotive/shipcrew-ai init
 ```
 
-After the package is on npm, you can also use:
-
-```bash
-npx @solvemotive/shipcrew-ai init
-```
-
-**2. Pick a crew** (interactive), or pass one explicitly:
-
-```bash
-npx --yes github:solvemotive/shipcrew-ai init saas-crew
-# indie-crew | bug-hunt-crew | launch-crew | ship-crew
-```
-
-**3. Command the Captain**
+Then:
 
 ```bash
 claude "use @captain and build auth"
 ```
 
-In Cursor Agent:
-
 ```text
 @captain ship email auth with Prisma and tests
 ```
 
-Alternative installers:
+---
+
+## Why shipcrew
+
+| Solo AI | shipcrew |
+|---------|----------|
+| One model does architecture, code, security, and tests | Specialists with clear jobs and tool permissions |
+| Easy to skip threat modeling | **@gunner** is always read-only Opus security |
+| Plans optional | **@navigator** charts before Captain executes |
+| Context muddies across roles | Agents stay scoped; Captain synthesizes |
+| Tool-specific prompts | Same crew in **Cursor** and **Claude Code** |
+
+### Voyage loop
+
+```mermaid
+flowchart LR
+  You[You] --> Captain[@captain]
+  Captain --> Navigator[@navigator plan]
+  Navigator --> Captain
+  Captain --> Specs[Specialists in parallel]
+  Specs --> Gunner[@gunner]
+  Specs --> Lookout[@lookout]
+  Gunner --> Captain
+  Lookout --> Captain
+  Captain --> You
+```
+
+1. **@navigator** writes the chart (architecture, tasks, risks)  
+2. **@captain** delegates — backend, frontend, API, DB, DevOps…  
+3. **@gunner** + **@lookout** gate sensitive / shippable work  
+4. Captain returns a voyage summary — **never writes app code**
+
+---
+
+## Quick start
+
+### 1. Install into your project
+
+Works today from GitHub:
+
+```bash
+cd your-app
+npx --yes github:solvemotive/shipcrew-ai init
+```
+
+Pick a crew interactively, or pass one:
+
+```bash
+npx --yes github:solvemotive/shipcrew-ai init saas-crew
+```
+
+After npm publish you can also use:
+
+```bash
+npx @solvemotive/shipcrew-ai init
+```
+
+**Shell installers** (npm → GitHub → git clone fallbacks):
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/solvemotive/shipcrew-ai/main/install.sh | bash
@@ -59,80 +91,132 @@ curl -fsSL https://raw.githubusercontent.com/solvemotive/shipcrew-ai/main/instal
 irm https://raw.githubusercontent.com/solvemotive/shipcrew-ai/main/install.ps1 | iex
 ```
 
-## Why shipcrew vs solo AI
+### 2. Command the Captain
 
-| Solo prompting | shipcrew |
-|----------------|----------|
-| One generalist does architecture, code, security, and tests | Specialists with clear jobs and tool permissions |
-| Easy to skip threat modeling | **@gunner** is read-only Opus security on every sensitive voyage |
-| Plans optional | **@navigator** charts before Captain executes |
-| Context muddies across roles | Agents stay scoped; Captain synthesizes |
-| Works in one tool | Same crew for **Cursor** and **Claude Code** |
+| Tool | Example |
+|------|---------|
+| Claude Code | `claude "use @captain and build auth"` |
+| Claude slash | `/ship Add magic-link login` |
+| Cursor Agent | `@captain ship email auth with Prisma and tests` |
 
-## Crew roster (16)
+### 3. What lands in your repo
 
-| Agent | Role | Model | Tools |
-|-------|------|-------|-------|
-| **@captain** | Orchestrator / tech lead — only agent that spawns others | opus | Read, Glob, Grep, Agent |
-| **@navigator** | System architect — plans before build | sonnet | Read, Glob, Grep |
-| **@boatswain** | Backend engineer (universal) | sonnet | Read, Glob, Grep, Bash, Edit, Write |
-| **@carpenter** | Frontend React/Vue | sonnet | Read, Glob, Grep, Bash, Edit, Write |
-| **@carpenter-next** | Next.js (App Router, RSC, actions) | sonnet | Read, Glob, Grep, Bash, Edit, Write |
-| **@rigger** | API & GraphQL architect | sonnet | Read, Glob, Grep |
-| **@gunner** | Security auditor (always read-only) | opus | Read, Glob, Grep |
-| **@surgeon** | Debugger & bug fixer | sonnet | Read, Glob, Grep, Bash, Edit, Write |
-| **@quartermaster** | DevOps — Docker, CI/CD | sonnet | Read, Glob, Grep, Bash, Edit, Write |
-| **@lookout** | Tests & QA | sonnet | Read, Glob, Grep, Bash, Edit, Write |
-| **@cartographer** | Documentation | sonnet | Read, Glob, Grep |
-| **@purser** | Performance optimizer | sonnet | Read, Glob, Grep |
-| **@code-archaeologist** | Legacy / unfamiliar code explorer | sonnet | Read, Glob, Grep |
-| **@data-master** | DBA — SQL, Prisma, Drizzle | sonnet | Read, Glob, Grep |
-| **@design-mate** | UI/UX + Tailwind | sonnet | Read, Glob, Grep |
-| **@team-configurator** | Detects stack; writes CLAUDE.md config | sonnet | Read, Glob, Grep, Bash, Edit, Write |
+| Path | Purpose |
+|------|---------|
+| `.claude/agents/` | Claude Code subagents |
+| `.claude/commands/` | `/ship`, `/crew` |
+| `.cursor/agents/` | Cursor agents |
+| `.cursor/rules/shipcrew.mdc` | Always-on routing rule |
+| `CLAUDE.md` | Shipcrew Configuration (Task \| Agent \| Notes) when a manifest is detected |
 
-## Teams
+---
 
-Presets live in `teams/*.json` and control which agents `init` copies:
+## Choose a crew
 
-| Team | Agents | Best for |
-|------|--------|----------|
-| **saas-crew** | captain, navigator, boatswain, carpenter-next, rigger, gunner, lookout | SaaS products |
-| **indie-crew** | captain, carpenter-next, design-mate, quartermaster | Lean solo/small teams |
-| **bug-hunt-crew** | captain, surgeon, lookout, gunner | Incidents & regressions |
-| **launch-crew** | captain, navigator, carpenter-next, design-mate, quartermaster, cartographer, team-configurator | Greenfield scaffolding |
-| **ship-crew** | all 16 | Full coverage |
+| Crew | Size | Best for | Includes |
+|------|------|----------|----------|
+| **saas-crew** | 7 | Product SaaS | captain, navigator, boatswain, carpenter-next, rigger, gunner, lookout |
+| **indie-crew** | 4 | Solo / small teams | captain, carpenter-next, design-mate, quartermaster |
+| **bug-hunt-crew** | 4 | Incidents & regressions | captain, surgeon, lookout, gunner |
+| **launch-crew** | 7 | Greenfield scaffolding | captain, navigator, carpenter-next, design-mate, quartermaster, cartographer, team-configurator |
+| **ship-crew** | 16 | Full coverage | entire roster |
 
 ```bash
 npx --yes github:solvemotive/shipcrew-ai list
 npx --yes github:solvemotive/shipcrew-ai init bug-hunt-crew --force
 ```
 
-## How Captain works
+`--force` replaces the installed crew set (prunes agents not in the new preset).
 
-When you ask to build something, **@captain**:
+---
 
-1. Calls **@navigator** for a technical plan  
-2. Breaks the plan into tasks  
-3. Delegates to specialists (parallel when independent)  
-4. Runs **@gunner** + **@lookout** for final check  
-5. Reports a voyage summary — Captain does **not** write app code  
+## Crew roster (16)
 
-## What `init` does
+| Agent | Role | Model | Mutates repo? |
+|-------|------|-------|---------------|
+| **@captain** | Orchestrator — only agent that spawns others | opus | No (Agent tool only) |
+| **@navigator** | System architect — plan before build | sonnet | No |
+| **@boatswain** | Backend (APIs, auth, jobs, services) | sonnet | Yes |
+| **@carpenter** | Frontend React / Vue | sonnet | Yes |
+| **@carpenter-next** | Next.js App Router / RSC / actions | sonnet | Yes |
+| **@rigger** | API & GraphQL contracts | sonnet | No |
+| **@gunner** | Security auditor | opus | **Never** |
+| **@surgeon** | Debugger & minimal fixes | sonnet | Yes |
+| **@quartermaster** | Docker, CI/CD, deploy | sonnet | Yes |
+| **@lookout** | Tests & QA | sonnet | Yes |
+| **@cartographer** | Docs / ADRs / runbooks | sonnet | Drafts only |
+| **@purser** | Performance | sonnet | No |
+| **@code-archaeologist** | Legacy / unknown codebases | sonnet | No |
+| **@data-master** | SQL, Prisma, Drizzle | sonnet | No (specs) |
+| **@design-mate** | UI/UX + Tailwind | sonnet | No (specs) |
+| **@team-configurator** | Stack detect → CLAUDE.md | sonnet | Yes |
 
-- Detects `.claude` / `.cursor`
-- Copies selected agents → `.claude/agents/` and `.cursor/agents/`
-- Installs `.claude/commands/` (`/ship`, `/crew`) and `.cursor/rules/shipcrew.mdc`
-- If `package.json` (or other manifests) exist, writes **## Shipcrew Configuration** into `CLAUDE.md` with a Task \| Agent \| Notes table
+---
 
-## Skills
+## Prompt recipes
+
+Copy-paste starters — full playbook in [docs/VOYAGES.md](./docs/VOYAGES.md).
+
+**New feature**
+```text
+@captain Ship team invites with role-based access.
+Use @navigator first. Prefer existing auth patterns. End with @gunner + @lookout.
+```
+
+**Bug**
+```text
+@captain Fix flaky checkout test on CI only.
+Delegate @surgeon, then lock with @lookout. @gunner if auth/money touched.
+```
+
+**Security pass**
+```text
+@gunner Review auth middleware and tenant isolation. Read-only. Rank findings by severity.
+```
+
+**Greenfield**
+```text
+@captain Scaffold a Next.js SaaS with Prisma, Auth.js, and Tailwind.
+Use launch-crew specialists. @cartographer should draft README setup.
+```
+
+---
+
+## Platform guides
+
+| Guide | Contents |
+|-------|----------|
+| [docs/CURSOR.md](./docs/CURSOR.md) | Cursor agents, rules, recipes, troubleshooting |
+| [docs/CLAUDE.md](./docs/CLAUDE.md) | Claude Code subagents, `/ship` `/crew`, CLAUDE.md markers |
+| [docs/VOYAGES.md](./docs/VOYAGES.md) | End-to-end prompt playbooks |
+| [docs/FAQ.md](./docs/FAQ.md) | Common issues and answers |
+
+### Skills (optional playbooks)
 
 - `skills/ship-spec.md` — spec → navigate → ship → verify  
 - `skills/ship-review.md` — multi-lens PR review  
 
-## Docs
+---
 
-- [Cursor setup](./docs/CURSOR.md)
-- [Claude Code setup](./docs/CLAUDE.md)
+## CLI reference
+
+```bash
+npx --yes github:solvemotive/shipcrew-ai init [crew] [--force] [--yes]
+npx --yes github:solvemotive/shipcrew-ai list
+npx --yes github:solvemotive/shipcrew-ai help
+npx --yes github:solvemotive/shipcrew-ai version
+```
+
+| Flag | Meaning |
+|------|---------|
+| `--yes` / `-y` | Non-interactive (default crew `ship-crew` if omitted) |
+| `--force` / `-f` | Overwrite agents; prune ones not in the selected crew |
+
+Bins after install: `shipcrew` and `shipcrew-ai` (same CLI).
+
+Package: **`@solvemotive/shipcrew-ai`** · Repo: **[solvemotive/shipcrew-ai](https://github.com/solvemotive/shipcrew-ai)**
+
+---
 
 ## Development
 
@@ -140,9 +224,14 @@ When you ask to build something, **@captain**:
 git clone https://github.com/solvemotive/shipcrew-ai.git
 cd shipcrew-ai
 node bin/cli.js list
-node bin/cli.js init ship-crew --yes
+# init only inside a separate test project — never in this repo
+mkdir /tmp/crew-demo && cd /tmp/crew-demo
+npm init -y
+node /path/to/shipcrew-ai/bin/cli.js init indie-crew --yes
 ```
+
+Edit agents in `agents/` only, then copy to `.claude/agents/` and `.cursor/agents/`.
 
 ## License
 
-[MIT](./LICENSE)
+[MIT](./LICENSE) © SolveMotive
