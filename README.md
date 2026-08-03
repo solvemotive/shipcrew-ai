@@ -1,5 +1,7 @@
 # shipcrew
 
+[![shipcrew](https://img.shields.io/badge/shipcrew-ready-0ea5e9?style=flat-square)](https://github.com/solvemotive/shipcrew-ai)
+
 [![License: MIT](https://img.shields.io/badge/license-MIT-green?style=flat-square)](./LICENSE)
 [![npx](https://img.shields.io/badge/npx-@solvemotive/shipcrew--ai-black?style=flat-square)](https://github.com/solvemotive/shipcrew-ai#quick-start)
 [![Cursor](https://img.shields.io/badge/Cursor-compatible-0A66C2?style=flat-square&logo=cursor&logoColor=white)](./docs/CURSOR.md)
@@ -16,6 +18,14 @@ One command installs a full company of specialized AI agents that work natively 
 
 **1. Initialize shipcrew in your project**
 
+Works today from GitHub (no npm publish required):
+
+```bash
+npx --yes github:solvemotive/shipcrew-ai init
+```
+
+After the package is on npm, you can also use:
+
 ```bash
 npx @solvemotive/shipcrew-ai init
 ```
@@ -23,7 +33,7 @@ npx @solvemotive/shipcrew-ai init
 **2. Pick a crew** (interactive), or pass one explicitly:
 
 ```bash
-npx @solvemotive/shipcrew-ai init saas-crew
+npx --yes github:solvemotive/shipcrew-ai init saas-crew
 # indie-crew | bug-hunt-crew | launch-crew | ship-crew
 ```
 
@@ -93,8 +103,8 @@ Presets live in `teams/*.json` and control which agents `init` copies:
 | **ship-crew** | all 16 | Full coverage |
 
 ```bash
-npx @solvemotive/shipcrew-ai list
-npx @solvemotive/shipcrew-ai init bug-hunt-crew --force
+npx --yes github:solvemotive/shipcrew-ai list
+npx --yes github:solvemotive/shipcrew-ai init bug-hunt-crew --force
 ```
 
 ## How Captain works

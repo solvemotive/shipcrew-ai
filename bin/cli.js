@@ -58,7 +58,7 @@ ${Object.entries(TEAMS)
   .join('\n')}
 
 Examples:
-  npx @solvemotive/shipcrew-ai init
+  npx --yes github:solvemotive/shipcrew-ai init
   npx @solvemotive/shipcrew-ai init saas-crew
   npx @solvemotive/shipcrew-ai init ship-crew --force
 `);
@@ -396,6 +396,26 @@ async function cmdInit(args) {
   const force = args.includes('--force') || args.includes('-f');
   const yes = args.includes('--yes') || args.includes('-y');
   let crewName = args.find((a) => !a.startsWith('-') && a !== 'init');
+
+  // Never mutate the shipcrew package source tree itself
+  const pkgJsonPath = path.join(cwd, 'package.json');
+  if (path.resolve(cwd) === path.resolve(PKG_ROOT)) {
+    log(c('red', '  Refusing to run init inside the shipcrew-ai source repo.'));
+    log(c('dim', '  cd into your project directory, then run init again.'));
+    process.exit(1);
+  }
+  if (fs.existsSync(pkgJsonPath)) {
+    try {
+      const localPkg = JSON.parse(fs.readFileSync(pkgJsonPath, 'utf8'));
+      if (localPkg.name === '@solvemotive/shipcrew-ai') {
+        log(c('red', '  Refusing to run init inside the @solvemotive/shipcrew-ai package.'));
+        log(c('dim', '  cd into your project directory, then run init again.'));
+        process.exit(1);
+      }
+    } catch {
+      /* ignore */
+    }
+  }
 
   const hasClaude = fs.existsSync(path.join(cwd, '.claude'));
   const hasCursor = fs.existsSync(path.join(cwd, '.cursor'));

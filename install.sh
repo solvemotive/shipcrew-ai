@@ -4,6 +4,7 @@
 set -euo pipefail
 
 REPO_URL="${SHIPCREW_REPO:-https://github.com/solvemotive/shipcrew-ai.git}"
+NPM_PKG="${SHIPCREW_NPM:-@solvemotive/shipcrew-ai}"
 CREW="${SHIPCREW_CREW:-ship-crew}"
 INSTALL_DIR="${SHIPCREW_DIR:-$(pwd)}"
 
@@ -33,19 +34,36 @@ echo -e "  Installing into: ${BOLD}${INSTALL_DIR}${NC}"
 echo -e "  Crew: ${BOLD}${CREW}${NC}"
 echo ""
 
-if command -v npx >/dev/null 2>&1; then
+run_cli() {
   cd "$INSTALL_DIR"
-  npx --yes @solvemotive/shipcrew-ai init "$CREW" --yes
-else
-  TMP=$(mktemp -d)
-  trap 'rm -rf "$TMP"' EXIT
-  if command -v git >/dev/null 2>&1; then
-    git clone --depth 1 "$REPO_URL" "$TMP/shipcrew"
-    node "$TMP/shipcrew/bin/cli.js" init "$CREW" --yes
-  else
-    echo "Need npx or git to install shipcrew."
+  node "$1" init "$CREW" --yes
+}
+
+install_from_git() {
+  if ! command -v git >/dev/null 2>&1; then
+    echo "git is required to fall back to a source install."
     exit 1
   fi
+  TMP=$(mktemp -d)
+  trap 'rm -rf "$TMP"' EXIT
+  echo "  Fetching shipcrew from GitHub…"
+  git clone --depth 1 "$REPO_URL" "$TMP/shipcrew-ai"
+  run_cli "$TMP/shipcrew-ai/bin/cli.js"
+}
+
+cd "$INSTALL_DIR"
+
+if command -v npx >/dev/null 2>&1; then
+  if npx --yes "$NPM_PKG" init "$CREW" --yes; then
+    :
+  elif npx --yes "github:solvemotive/shipcrew-ai" init "$CREW" --yes; then
+    echo -e "${DIM}  (installed via GitHub; npm package not required)${NC}"
+  else
+    echo "  npx failed — falling back to git clone…"
+    install_from_git
+  fi
+else
+  install_from_git
 fi
 
 echo ""
