@@ -1,5 +1,9 @@
 # shipcrew-ai
 
+<p align="center">
+  <img src="./docs/assets/shipcrew-ai-banner.jpg" alt="shipcrew-ai — Stop prompting. Command a crew." width="100%" />
+</p>
+
 [![License: MIT](https://img.shields.io/badge/license-MIT-green?style=flat-square)](./LICENSE)
 [![npm](https://img.shields.io/npm/v/@solvemotive/shipcrew-ai?style=flat-square)](https://www.npmjs.com/package/@solvemotive/shipcrew-ai)
 [![npm downloads](https://img.shields.io/npm/dm/@solvemotive/shipcrew-ai?style=flat-square)](https://www.npmjs.com/package/@solvemotive/shipcrew-ai)
