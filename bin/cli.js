@@ -4,11 +4,21 @@
 const fs = require('fs');
 const path = require('path');
 const readline = require('readline');
+const {
+  toCursorAgent,
+  ensureShipcrewDir,
+  readVoyage,
+  startVoyage,
+  parseVoyageFields,
+  buildAutopilotPrompt,
+  voyagePath,
+} = require('./lib/autopilot');
 
 const PKG_ROOT = path.resolve(__dirname, '..');
 const AGENTS_DIR = path.join(PKG_ROOT, 'agents');
 const TEAMS_DIR = path.join(PKG_ROOT, 'teams');
 const SKILLS_DIR = path.join(PKG_ROOT, 'skills');
+const TEMPLATES_SHIPCREW = path.join(PKG_ROOT, 'templates', 'shipcrew');
 
 const TEAMS = {
   'saas-crew': 'SaaS product crew — captain, navigator, backend, next, api, security, qa',
@@ -31,6 +41,7 @@ const COLORS = {
 };
 
 function c(color, text) {
+  if (process.env.NO_COLOR || !process.stdout.isTTY) return text;
   return `${COLORS[color] || ''}${text}${COLORS.reset}`;
 }
 
@@ -49,9 +60,12 @@ function usage() {
   log(`Usage: ${c('bold', 'npx @solvemotive/shipcrew-ai <command>')} [options]
 
 Commands:
-  ${c('green', 'init')} [crew]     Install agents into .claude/ and .cursor/
-  ${c('green', 'list')}            List available crews and agents
-  ${c('green', 'help')}            Show this help
+  ${c('green', 'init')} [crew]       Install agents + autopilot templates
+  ${c('green', 'run')} <goal>        Start autopilot voyage + print prompt
+  ${c('green', 'status')}            Show .shipcrew/voyage.yml status
+  ${c('green', 'resume')}            Print resume prompt for current voyage
+  ${c('green', 'list')}              List crews and agents
+  ${c('green', 'help')}              Show this help
 
 Crews:
 ${Object.entries(TEAMS)
@@ -59,9 +73,10 @@ ${Object.entries(TEAMS)
   .join('\n')}
 
 Examples:
-  npx --yes github:solvemotive/shipcrew-ai init
-  npx @solvemotive/shipcrew-ai init saas-crew
-  npx @solvemotive/shipcrew-ai init ship-crew --force
+  npx --yes github:solvemotive/shipcrew-ai init ship-crew
+  npx @solvemotive/shipcrew-ai run "Ship team invites with RBAC"
+  npx @solvemotive/shipcrew-ai status
+  npx @solvemotive/shipcrew-ai resume
 `);
 }
 
@@ -433,11 +448,6 @@ function installCursorRules(cwd, force) {
   return 'copied';
 }
 
-function toCursorAgent(content, filename) {
-  // Cursor agents: keep frontmatter compatible; ensure description is rich
-  return content;
-}
-
 async function cmdInit(args) {
   banner();
   const cwd = process.cwd();
@@ -543,16 +553,22 @@ async function cmdInit(args) {
     const src = path.join(AGENTS_DIR, file);
     const claudeDest = path.join(claudeAgents, file);
     const cursorDest = path.join(cursorAgents, file);
+    const content = fs.readFileSync(src, 'utf8');
 
-    for (const dest of [claudeDest, cursorDest]) {
-      if (fs.existsSync(dest) && !force) {
-        skipped += 1;
-        continue;
-      }
-      const content = fs.readFileSync(src, 'utf8');
-      ensureDir(path.dirname(dest));
-      fs.writeFileSync(dest, toCursorAgent(content, file), 'utf8');
+    if (!fs.existsSync(claudeDest) || force) {
+      ensureDir(path.dirname(claudeDest));
+      fs.writeFileSync(claudeDest, content, 'utf8');
       copied += 1;
+    } else {
+      skipped += 1;
+    }
+
+    if (!fs.existsSync(cursorDest) || force) {
+      ensureDir(path.dirname(cursorDest));
+      fs.writeFileSync(cursorDest, toCursorAgent(content), 'utf8');
+      copied += 1;
+    } else {
+      skipped += 1;
     }
     log(`  ${c('green', '✓')} ${file}`);
   }
@@ -560,6 +576,10 @@ async function cmdInit(args) {
   installCommands(cwd, force);
   installCursorRules(cwd, force);
   installSkills(cwd, force);
+  const tpl = ensureShipcrewDir(cwd, TEMPLATES_SHIPCREW, force);
+  if (tpl.length) {
+    log(`  ${c('green', '✓')} .shipcrew/ autopilot templates (${tpl.map((t) => t.file).join(', ')})`);
+  }
 
   const stack = detectStack(cwd);
   let configStatus = null;
@@ -584,8 +604,92 @@ async function cmdInit(args) {
   log(`  Targets: ${c('cyan', '.claude/agents/')} and ${c('cyan', '.cursor/agents/')}`);
   log('');
   log(c('bold', '  Try:'));
+  log(`    ${c('cyan', 'npx @solvemotive/shipcrew-ai run "Ship auth with tests"')}`);
+  log(`    ${c('cyan', "/autopilot Ship auth with tests")}`);
   log(`    ${c('cyan', "claude 'use @captain and build auth'")}`);
-  log(`    ${c('cyan', "cursor → @captain ship a login flow")}`);
+  log('');
+}
+
+function cmdRun(args) {
+  banner();
+  const cwd = process.cwd();
+  const force = args.includes('--force') || args.includes('-f');
+  const goal = args.filter((a) => !a.startsWith('-')).join(' ').trim();
+  if (!goal) {
+    log(c('red', '  Usage: shipcrew-ai run "<goal>"'));
+    process.exit(1);
+  }
+
+  ensureShipcrewDir(cwd, TEMPLATES_SHIPCREW, force);
+  const existing = parseVoyageFields(readVoyage(cwd) || '');
+  if (existing && existing.status === 'in_progress' && !force) {
+    log(c('yellow', '  A voyage is already in_progress. Use --force to replace, or:'));
+    log(`    ${c('cyan', 'shipcrew-ai resume')}`);
+    log(`    ${c('cyan', 'shipcrew-ai status')}`);
+    process.exit(1);
+  }
+
+  const { id, path: vpath } = startVoyage(cwd, { goal, source: 'cli', crew: 'ship-crew' });
+  const prompt = buildAutopilotPrompt(goal);
+
+  log(c('green', c('bold', '  ⚓ Autopilot voyage started')));
+  log(`  id: ${id}`);
+  log(`  file: ${c('cyan', vpath)}`);
+  log('');
+  log(c('bold', '  Paste into Claude Code / Cursor:'));
+  log('');
+  log(prompt);
+  log('');
+  log(c('dim', '  Or: /autopilot ' + goal));
+  log('');
+}
+
+function cmdStatus() {
+  banner();
+  const cwd = process.cwd();
+  const raw = readVoyage(cwd);
+  if (!raw) {
+    log(c('yellow', '  No voyage found. Start one:'));
+    log(`    ${c('cyan', 'shipcrew-ai run "Your goal"')}`);
+    process.exit(1);
+  }
+  const v = parseVoyageFields(raw);
+  log(c('bold', '  Voyage status'));
+  log(`  id:      ${v.id}`);
+  log(`  status:  ${v.status}`);
+  log(`  goal:    ${v.goal}`);
+  log(`  crew:    ${v.crew}`);
+  log(`  source:  ${v.source}`);
+  log(`  updated: ${v.updated_at}`);
+  log(`  file:    ${c('cyan', voyagePath(cwd))}`);
+  if (v.summary) log(`  summary: ${v.summary}`);
+  log('');
+  const gates = raw.match(/gates:[\s\S]*?(?=\nblockers:|\nsummary:|$)/);
+  if (gates) {
+    log(c('bold', '  Gates'));
+    log(gates[0].replace(/^/gm, '  '));
+  }
+  log('');
+}
+
+function cmdResume() {
+  banner();
+  const cwd = process.cwd();
+  const raw = readVoyage(cwd);
+  const v = parseVoyageFields(raw || '');
+  if (!v || !v.goal) {
+    log(c('yellow', '  No active voyage. Start with:'));
+    log(`    ${c('cyan', 'shipcrew-ai run "Your goal"')}`);
+    process.exit(1);
+  }
+  const prompt = `RESUME AUTOPILOT. Read .shipcrew/voyage.yml (status=${v.status}), .shipcrew/policy.md, .shipcrew/dod.md.
+
+Continue mission: ${v.goal}
+
+Do not restart from zero — update existing tasks, finish pending gates, satisfy DoD, then set status shipped or blocked.`;
+  log(c('bold', '  Resume prompt:'));
+  log('');
+  log(prompt);
   log('');
 }
 
@@ -622,6 +726,12 @@ async function main() {
   try {
     if (cmd === 'init') {
       await cmdInit(args.slice(1));
+    } else if (cmd === 'run') {
+      cmdRun(args.slice(1));
+    } else if (cmd === 'status') {
+      cmdStatus();
+    } else if (cmd === 'resume') {
+      cmdResume();
     } else if (cmd === 'list') {
       cmdList();
     } else if (cmd === 'help' || cmd === '--help' || cmd === '-h') {

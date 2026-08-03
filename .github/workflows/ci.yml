@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Syntax check
+        run: node --check bin/cli.js && node --check bin/lib/autopilot.js
+      - name: Unit tests
+        run: node --test test/*.test.js
+      - name: Agent sync check
+        run: |
+          diff -rq agents .claude/agents
+          test "$(ls agents/*.md | wc -l)" -eq "$(ls .cursor/agents/*.md | wc -l)"
+          # Cursor copies must be transformed (no tools: frontmatter)
+          ! grep -q '^tools:' .cursor/agents/06-gunner-security.md
+          grep -q 'readonly: true' .cursor/agents/06-gunner-security.md
+      - name: Pack dry-run
+        run: npm pack --dry-run

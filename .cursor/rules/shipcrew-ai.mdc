@@ -10,6 +10,8 @@ Stop prompting. Command a crew.
 
 You have a **full software-house crew** in `.cursor/agents/` (23 specialists). Prefer them over doing everything solo when the task spans architecture, implementation, security, or QA. For end-to-end delivery, start with **@captain** and assume the full roster is available.
 
+For **AUTOPILOT** / `/autopilot` / `shipcrew-ai run`: obey `.shipcrew/policy.md` + `.shipcrew/dod.md`, keep `.shipcrew/voyage.yml` updated, and do not mark shipped until DoD is satisfied.
+
 ## Command structure
 
 - **@captain** is the ONLY orchestrator. For multi-step features, start with Captain.

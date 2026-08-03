@@ -13,6 +13,11 @@ When the user asks to build, change, ship, refactor, or investigate anything non
 
 Prefer installing/using the full **ship-crew** roster when the user wants complete delivery (not a lean preset).
 
+When the user invokes **AUTOPILOT**, `/autopilot`, or `shipcrew-ai run|resume`:
+1. Read `.shipcrew/policy.md`, `.shipcrew/dod.md`, and `.shipcrew/voyage.yml` (create/update voyage state as you go).
+2. Obey policy gates — never silent-skip `@gunner` / `@lookout`.
+3. Do **not** set voyage `status: shipped` until DoD checkboxes are satisfied or explicitly blocked with reasons in the voyage file.
+
 ## Voyage protocol (mandatory)
 
 1. **Chart the course** — Call `@navigator` first. Require a technical plan covering architecture, files touched, risks, sequencing, and acceptance criteria. Do not skip this for feature work.

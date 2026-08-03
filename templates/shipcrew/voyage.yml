@@ -1,0 +1,33 @@
+# Autopilot voyage state
+# Updated by @captain during /autopilot or `shipcrew-ai run`
+# status: planned | in_progress | blocked | shipped
+
+id: ""
+goal: ""
+status: planned
+crew: ship-crew
+created_at: ""
+updated_at: ""
+source: ""  # cli | autopilot | github-issue
+
+policy: .shipcrew/policy.md
+dod: .shipcrew/dod.md
+
+acceptance_criteria: []
+
+tasks: []
+# Example task:
+# - id: T1
+#   title: Chart architecture
+#   owner: navigator
+#   status: done  # pending | in_progress | done | blocked
+#   notes: ""
+
+gates:
+  gunner: pending    # pending | passed | waived | blocked | n/a
+  lookout: pending
+  cartographer: n/a
+  quartermaster: n/a
+
+blockers: []
+summary: ""

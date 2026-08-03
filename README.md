@@ -28,6 +28,16 @@ claude "use @captain and build auth"
 
 ---
 
+## Autopilot
+
+```bash
+npx --yes github:solvemotive/shipcrew-ai init ship-crew
+npx --yes github:solvemotive/shipcrew-ai run "Ship team invites with RBAC"
+```
+
+Paste the prompt into Claude/Cursor, or use `/autopilot …`.  
+Gates: `.shipcrew/policy.md` + `.shipcrew/dod.md` + voyage state. Full guide: [docs/AUTOPILOT.md](./docs/AUTOPILOT.md).
+
 ## Why shipcrew-ai
 
 A solo model is a freelancer. **shipcrew-ai is the software house**: product engineering, platform stacks, security, QA, DevOps, and docs — coordinated by Captain for full delivery.
@@ -207,6 +217,7 @@ Use launch-crew specialists. @cartographer should draft README setup.
 | [docs/CLAUDE.md](./docs/CLAUDE.md) | Claude Code subagents, `/ship` `/crew`, CLAUDE.md markers |
 | [docs/VOYAGES.md](./docs/VOYAGES.md) | End-to-end prompt playbooks |
 | [docs/FAQ.md](./docs/FAQ.md) | Common issues and answers |
+| [docs/AUTOPILOT.md](./docs/AUTOPILOT.md) | Autopilot, voyage state, GitHub label flow |
 
 ### Skills (optional playbooks)
 

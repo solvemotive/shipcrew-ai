@@ -1,0 +1,140 @@
+name: Autopilot issue → voyage
+
+# Label an issue `ship` or `autopilot` to open a voyage PR + comment the run prompt.
+on:
+  issues:
+    types: [labeled]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  open-voyage:
+    if: github.event.label.name == 'ship' || github.event.label.name == 'autopilot'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Create voyage branch and files
+        env:
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          set -euo pipefail
+          BRANCH="autopilot/issue-${ISSUE_NUMBER}"
+          git config user.name "shipcrew-ai bot"
+          git config user.email "bot@users.noreply.github.com"
+          git checkout -B "$BRANCH"
+
+          mkdir -p .shipcrew
+          if [ -f templates/shipcrew/policy.md ]; then cp templates/shipcrew/policy.md .shipcrew/policy.md; fi
+          if [ -f templates/shipcrew/dod.md ]; then cp templates/shipcrew/dod.md .shipcrew/dod.md; fi
+
+          GOAL="$ISSUE_TITLE"
+          NOW="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          cat > .shipcrew/voyage.yml <<EOF
+          # Autopilot voyage from GitHub issue #${ISSUE_NUMBER}
+          id: "issue-${ISSUE_NUMBER}"
+          goal: $(node -p 'JSON.stringify(process.env.ISSUE_TITLE || "")')
+          status: in_progress
+          crew: ship-crew
+          created_at: "${NOW}"
+          updated_at: "${NOW}"
+          source: "github-issue"
+
+          policy: .shipcrew/policy.md
+          dod: .shipcrew/dod.md
+
+          acceptance_criteria: []
+          tasks: []
+          gates:
+            gunner: pending
+            lookout: pending
+            cartographer: n/a
+            quartermaster: n/a
+          blockers: []
+          summary: ""
+          EOF
+
+          # Fix YAML indentation (heredoc above may be indented)
+          node -e '
+            const fs=require("fs");
+            let s=fs.readFileSync(".shipcrew/voyage.yml","utf8");
+            s=s.split("\n").map(l=>l.replace(/^          /,"")).join("\n");
+            fs.writeFileSync(".shipcrew/voyage.yml", s);
+          '
+
+          printf '%s\n' "# Autopilot mission (issue #${ISSUE_NUMBER})" "" "$ISSUE_BODY" > .shipcrew/ISSUE.md
+
+          git add .shipcrew
+          git commit -m "chore: open autopilot voyage for #${ISSUE_NUMBER}" || echo "No changes"
+          git push -u origin "$BRANCH" --force
+
+      - name: Open pull request
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+        run: |
+          BRANCH="autopilot/issue-${ISSUE_NUMBER}"
+          if gh pr list --head "$BRANCH" --json number --jq 'length' | grep -q '^0$'; then
+            gh pr create --base main --head "$BRANCH" \
+              --title "Autopilot: ${ISSUE_TITLE}" \
+              --body "$(cat <<EOF
+          ## Autopilot voyage
+
+          Opened from issue #${ISSUE_NUMBER}.
+
+          ### Run locally or in Cursor/Claude
+
+          \`\`\`bash
+          npx --yes github:solvemotive/shipcrew-ai init ship-crew
+          npx --yes github:solvemotive/shipcrew-ai resume
+          \`\`\`
+
+          Or:
+
+          \`\`\`
+          /autopilot ${ISSUE_TITLE}
+          \`\`\`
+
+          Obey \`.shipcrew/policy.md\` and \`.shipcrew/dod.md\`. Mark voyage shipped only when DoD is complete.
+          EOF
+          )"
+          else
+            echo "PR already exists"
+          fi
+
+      - name: Comment on issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = context.payload.issue.title;
+            const n = context.payload.issue.number;
+            const body = `⚓ **shipcrew-ai autopilot** armed for this issue.
+
+            1. Checkout the \`autopilot/issue-${n}\` PR branch (or pull latest).
+            2. Run:
+            \`\`\`bash
+            npx --yes github:solvemotive/shipcrew-ai init ship-crew
+            \`\`\`
+            3. In Claude Code / Cursor:
+            \`\`\`
+            /autopilot ${title}
+            \`\`\`
+            or \`shipcrew-ai resume\` after pulling \`.shipcrew/voyage.yml\`.
+
+            Policy + DoD gates are mandatory before marking shipped.`;
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: n,
+              body
+            });

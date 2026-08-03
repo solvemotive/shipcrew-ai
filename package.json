@@ -1,7 +1,7 @@
 {
   "name": "@solvemotive/shipcrew-ai",
-  "version": "1.0.0",
-  "description": "Full AI software house for Cursor & Claude Code — 23 specialists, one Captain, end-to-end delivery.",
+  "version": "1.1.0",
+  "description": "Full AI software house for Cursor & Claude Code — 23 specialists, autopilot voyages, end-to-end delivery.",
   "keywords": [
     "claude-code",
     "cursor",
@@ -30,6 +30,7 @@
     "bin/",
     "agents/",
     "teams/",
+    "templates/",
     ".claude/",
     ".cursor/",
     "skills/",
