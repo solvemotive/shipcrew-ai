@@ -56,12 +56,12 @@ A solo model is a freelancer. **shipcrew-ai is the software house**: product eng
 
 ```mermaid
 flowchart LR
-  You[You] --> Captain[@captain]
-  Captain --> Navigator[@navigator plan]
+  You[You] --> Captain["@captain"]
+  Captain --> Navigator["@navigator plan"]
   Navigator --> Captain
   Captain --> Specs[Specialists in parallel]
-  Specs --> Gunner[@gunner]
-  Specs --> Lookout[@lookout]
+  Specs --> Gunner["@gunner"]
+  Specs --> Lookout["@lookout"]
   Gunner --> Captain
   Lookout --> Captain
   Captain --> You
