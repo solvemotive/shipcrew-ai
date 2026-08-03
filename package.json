@@ -12,13 +12,13 @@
     "claude",
     "cursor-rules"
   ],
-  "homepage": "https://github.com/solvemotive/shipcrew-ai#readme",
+  "homepage": "https://github.com/solvemotive/shipcrew-ai",
   "bugs": {
     "url": "https://github.com/solvemotive/shipcrew-ai/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/solvemotive/shipcrew-ai.git"
+    "url": "git+https://github.com/solvemotive/shipcrew-ai.git"
   },
   "author": {
     "name": "SolveMotive",
