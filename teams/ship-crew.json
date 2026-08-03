@@ -1,6 +1,6 @@
 {
   "name": "ship-crew",
-  "description": "Full ship — all 23 crew members for maximum coverage",
+  "description": "Full software house — all 23 agents for end-to-end delivery (plan → build → secure → test → docs → ship)",
   "agents": [
     "captain",
     "navigator",

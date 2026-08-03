@@ -14,7 +14,7 @@ const TEAMS = {
   'saas-crew': 'SaaS product crew — captain, navigator, backend, next, api, security, qa',
   'indie-crew': 'Lean indie crew — captain, next, design, devops (4 agents)',
   'bug-hunt-crew': 'Bug hunt — captain, surgeon, lookout, gunner',
-  'ship-crew': 'Full ship — all 23 crew members',
+  'ship-crew': 'Full software house — all 23 agents for end-to-end delivery',
   'launch-crew': 'New project scaffolding — captain, navigator, next, design, devops, docs',
   'polyglot-crew': 'Stack specialists — Node, Nest, PHP, Laravel, Spring, Blockchain, React Native',
 };

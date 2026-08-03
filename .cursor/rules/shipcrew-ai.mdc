@@ -8,7 +8,7 @@ alwaysApply: true
 
 Stop prompting. Command a crew.
 
-You have access to specialized shipcrew-ai agents in `.cursor/agents/`. Prefer them over doing everything solo when the task spans architecture, implementation, security, or QA.
+You have a **full software-house crew** in `.cursor/agents/` (23 specialists). Prefer them over doing everything solo when the task spans architecture, implementation, security, or QA. For end-to-end delivery, start with **@captain** and assume the full roster is available.
 
 ## Command structure
 

@@ -8,10 +8,12 @@
 
 # Stop prompting. Command a crew.
 
-**shipcrew-ai** is the AI dev team for **Cursor** and **Claude Code** — twenty-three specialized agents, one Captain, and presets that match how real products ship.
+**shipcrew-ai** is a full **AI software house** in one repo — **23 specialists** for Cursor & Claude Code that deliver end-to-end: discovery → architecture → build → security → QA → docs → ship.
+
+One install. One Captain. The whole team.
 
 ```bash
-npx --yes github:solvemotive/shipcrew-ai init
+npx --yes github:solvemotive/shipcrew-ai init ship-crew
 ```
 
 Then:
@@ -28,15 +30,17 @@ claude "use @captain and build auth"
 
 ## Why shipcrew-ai
 
-| Solo AI | shipcrew-ai |
-|---------|----------|
-| One model does architecture, code, security, and tests | Specialists with clear jobs and tool permissions |
-| Easy to skip threat modeling | **@gunner** is always read-only Opus security |
-| Plans optional | **@navigator** charts before Captain executes |
-| Context muddies across roles | Agents stay scoped; Captain synthesizes |
+A solo model is a freelancer. **shipcrew-ai is the software house**: product engineering, platform stacks, security, QA, DevOps, and docs — coordinated by Captain for full delivery.
+
+| Solo AI | shipcrew-ai (software house) |
+|---------|------------------------------|
+| One model does everything | 23 specialists with clear jobs |
+| Easy to skip security / tests | **@gunner** + **@lookout** gate the voyage |
+| Plans optional | **@navigator** charts before build |
+| Stack-blind | Node, Nest, PHP, Laravel, Spring, RN, web3, Next… |
 | Tool-specific prompts | Same crew in **Cursor** and **Claude Code** |
 
-### Voyage loop
+### End-to-end delivery loop
 
 ```mermaid
 flowchart LR
@@ -115,14 +119,17 @@ irm https://raw.githubusercontent.com/solvemotive/shipcrew-ai/main/install.ps1 |
 
 ## Choose a crew
 
+**Default for full software-house delivery: `ship-crew` (all 23).**  
+Smaller presets exist when you want a leaner roster.
+
 | Crew | Size | Best for | Includes |
 |------|------|----------|----------|
-| **saas-crew** | 7 | Product SaaS | captain, navigator, boatswain, carpenter-next, rigger, gunner, lookout |
+| **ship-crew** | 23 | Full E2E software house | Entire roster — recommended |
+| **saas-crew** | 7 | Product SaaS slice | captain, navigator, boatswain, carpenter-next, rigger, gunner, lookout |
+| **polyglot-crew** | 11 | Multi-stack backends/mobile | Node, Nest, PHP, Laravel, Spring, chain, RN + core |
 | **indie-crew** | 4 | Solo / small teams | captain, carpenter-next, design-mate, quartermaster |
 | **bug-hunt-crew** | 4 | Incidents & regressions | captain, surgeon, lookout, gunner |
 | **launch-crew** | 7 | Greenfield scaffolding | captain, navigator, carpenter-next, design-mate, quartermaster, cartographer, team-configurator |
-| **ship-crew** | 23 | Full coverage | entire roster |
-| **polyglot-crew** | 11 | Multi-stack specialists | Node, Nest, PHP, Laravel, Spring, chain, RN + core |
 
 ```bash
 npx --yes github:solvemotive/shipcrew-ai list
