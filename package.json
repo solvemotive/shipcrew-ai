@@ -1,6 +1,6 @@
 {
   "name": "@solvemotive/shipcrew-ai",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Full AI software house for Cursor & Claude Code — 23 specialists, autopilot voyages, end-to-end delivery.",
   "keywords": [
     "claude-code",
@@ -18,10 +18,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/solvemotive/shipcrew-ai.git"
+    "url": "https://github.com/solvemotive/shipcrew-ai.git"
   },
-  "license": "MIT",
-  "author": "SolveMotive",
+  "author": {
+    "name": "SolveMotive",
+    "url": "https://github.com/solvemotive"
+  },
   "type": "commonjs",
   "bin": {
     "shipcrew-ai": "bin/cli.js"

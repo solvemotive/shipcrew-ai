@@ -1,7 +1,9 @@
 # shipcrew-ai
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-green?style=flat-square)](./LICENSE)
-[![npx](https://img.shields.io/badge/npx-github%3Asolvemotive%2Fshipcrew--ai-black?style=flat-square)](https://github.com/solvemotive/shipcrew-ai#quick-start)
+[![npm](https://img.shields.io/npm/v/@solvemotive/shipcrew-ai?style=flat-square)](https://www.npmjs.com/package/@solvemotive/shipcrew-ai)
+[![npm downloads](https://img.shields.io/npm/dm/@solvemotive/shipcrew-ai?style=flat-square)](https://www.npmjs.com/package/@solvemotive/shipcrew-ai)
+[![GitHub](https://img.shields.io/badge/GitHub-solvemotive%2Fshipcrew--ai-181717?style=flat-square&logo=github)](https://github.com/solvemotive/shipcrew-ai)
 [![Cursor](https://img.shields.io/badge/Cursor-compatible-0A66C2?style=flat-square&logo=cursor&logoColor=white)](./docs/CURSOR.md)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-compatible-D97706?style=flat-square)](./docs/CLAUDE.md)
 [![GitHub stars](https://img.shields.io/github/stars/solvemotive/shipcrew-ai?style=flat-square&logo=github)](https://github.com/solvemotive/shipcrew-ai)
