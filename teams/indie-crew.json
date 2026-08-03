@@ -1,0 +1,10 @@
+{
+  "name": "indie-crew",
+  "description": "Lean indie crew — captain, Next.js, design/Tailwind, and DevOps (4 agents)",
+  "agents": [
+    "captain",
+    "carpenter-next",
+    "design-mate",
+    "quartermaster"
+  ]
+}

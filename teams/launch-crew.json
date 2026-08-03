@@ -1,0 +1,13 @@
+{
+  "name": "launch-crew",
+  "description": "New project scaffolding — plan, Next.js app, design system, DevOps, and docs",
+  "agents": [
+    "captain",
+    "navigator",
+    "carpenter-next",
+    "design-mate",
+    "quartermaster",
+    "cartographer",
+    "team-configurator"
+  ]
+}

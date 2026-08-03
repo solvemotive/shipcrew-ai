@@ -1,0 +1,22 @@
+{
+  "name": "ship-crew",
+  "description": "Full ship — all 16 crew members for maximum coverage",
+  "agents": [
+    "captain",
+    "navigator",
+    "boatswain",
+    "carpenter",
+    "carpenter-next",
+    "rigger",
+    "gunner",
+    "surgeon",
+    "quartermaster",
+    "lookout",
+    "cartographer",
+    "purser",
+    "code-archaeologist",
+    "data-master",
+    "design-mate",
+    "team-configurator"
+  ]
+}

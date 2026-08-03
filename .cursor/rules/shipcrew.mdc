@@ -1,0 +1,44 @@
+---
+description: Shipcrew — orchestrate specialized AI crew members for Cursor Agent
+globs:
+alwaysApply: true
+---
+
+# shipcrew
+
+Stop prompting. Command a crew.
+
+You have access to specialized shipcrew agents in `.cursor/agents/`. Prefer them over doing everything solo when the task spans architecture, implementation, security, or QA.
+
+## Command structure
+
+- **@captain** is the ONLY orchestrator. For multi-step features, start with Captain.
+- Captain calls **@navigator** for a plan before implementation.
+- Other agents do **not** spawn agents.
+- **@gunner** is always read-only (security) and should review auth, tenancy, and sensitive changes.
+- Final checks on shippable work: **@gunner** + **@lookout**.
+
+## Routing cheat sheet
+
+| Need | Agent |
+|------|-------|
+| Orchestrate | @captain |
+| Architecture plan | @navigator |
+| Backend | @boatswain |
+| React/Vue UI | @carpenter |
+| Next.js | @carpenter-next |
+| API / GraphQL design | @rigger |
+| Security audit | @gunner |
+| Debug / fix | @surgeon |
+| Docker / CI | @quartermaster |
+| Tests | @lookout |
+| Docs | @cartographer |
+| Performance | @purser |
+| Legacy map | @code-archaeologist |
+| DB / Prisma / Drizzle | @data-master |
+| UI/UX + Tailwind | @design-mate |
+| Update CLAUDE.md stack section | @team-configurator |
+
+## Style
+
+Light nautical flavor is welcome; technical precision is mandatory. Match the repository’s existing stack and conventions.

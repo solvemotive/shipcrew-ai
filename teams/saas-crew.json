@@ -1,0 +1,13 @@
+{
+  "name": "saas-crew",
+  "description": "SaaS product crew — architecture, backend, Next.js, API design, security, and QA",
+  "agents": [
+    "captain",
+    "navigator",
+    "boatswain",
+    "carpenter-next",
+    "rigger",
+    "gunner",
+    "lookout"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "bug-hunt-crew",
+  "description": "Bug hunt — captain, surgeon, lookout, and gunner for triage and secure fixes",
+  "agents": [
+    "captain",
+    "surgeon",
+    "lookout",
+    "gunner"
+  ]
+}
