@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # shipcrew installer — macOS / Linux
-# Usage: curl -fsSL https://raw.githubusercontent.com/solvemotive/shipcrew/main/install.sh | bash
+# Usage: curl -fsSL https://raw.githubusercontent.com/solvemotive/shipcrew-ai/main/install.sh | bash
 set -euo pipefail
 
-REPO_URL="${SHIPCREW_REPO:-https://github.com/solvemotive/shipcrew.git}"
+REPO_URL="${SHIPCREW_REPO:-https://github.com/solvemotive/shipcrew-ai.git}"
 CREW="${SHIPCREW_CREW:-ship-crew}"
 INSTALL_DIR="${SHIPCREW_DIR:-$(pwd)}"
 

@@ -1,10 +1,10 @@
 # shipcrew
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-green?style=flat-square)](./LICENSE)
-[![npx](https://img.shields.io/badge/npx-@solvemotive/shipcrew--ai-black?style=flat-square)](https://github.com/solvemotive/shipcrew#quick-start)
+[![npx](https://img.shields.io/badge/npx-@solvemotive/shipcrew--ai-black?style=flat-square)](https://github.com/solvemotive/shipcrew-ai#quick-start)
 [![Cursor](https://img.shields.io/badge/Cursor-compatible-0A66C2?style=flat-square&logo=cursor&logoColor=white)](./docs/CURSOR.md)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-compatible-D97706?style=flat-square)](./docs/CLAUDE.md)
-[![GitHub stars](https://img.shields.io/github/stars/solvemotive/shipcrew?style=flat-square&logo=github)](https://github.com/solvemotive/shipcrew)
+[![GitHub stars](https://img.shields.io/github/stars/solvemotive/shipcrew-ai?style=flat-square&logo=github)](https://github.com/solvemotive/shipcrew-ai)
 
 **The AI crew that actually ships. For Cursor & Claude Code.**
 
@@ -42,11 +42,11 @@ In Cursor Agent:
 Alternative installers:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/solvemotive/shipcrew/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/solvemotive/shipcrew-ai/main/install.sh | bash
 ```
 
 ```powershell
-irm https://raw.githubusercontent.com/solvemotive/shipcrew/main/install.ps1 | iex
+irm https://raw.githubusercontent.com/solvemotive/shipcrew-ai/main/install.ps1 | iex
 ```
 
 ## Why shipcrew vs solo AI
@@ -127,8 +127,8 @@ When you ask to build something, **@captain**:
 ## Development
 
 ```bash
-git clone https://github.com/solvemotive/shipcrew.git
-cd shipcrew
+git clone https://github.com/solvemotive/shipcrew-ai.git
+cd shipcrew-ai
 node bin/cli.js list
 node bin/cli.js init ship-crew --yes
 ```

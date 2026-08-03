@@ -327,7 +327,7 @@ function upsertReadmeBadge(cwd) {
   const readme = path.join(cwd, 'README.md');
   if (!fs.existsSync(readme)) return null;
   const badge =
-    '[![shipcrew](https://img.shields.io/badge/shipcrew-ready-0ea5e9?style=flat-square)](https://github.com/solvemotive/shipcrew)';
+    '[![shipcrew](https://img.shields.io/badge/shipcrew-ready-0ea5e9?style=flat-square)](https://github.com/solvemotive/shipcrew-ai)';
   let content = fs.readFileSync(readme, 'utf8');
   if (content.includes('shipcrew-ready')) return 'exists';
   if (content.startsWith('#')) {

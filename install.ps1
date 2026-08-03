@@ -1,5 +1,5 @@
 # shipcrew installer — Windows PowerShell
-# Usage: irm https://raw.githubusercontent.com/solvemotive/shipcrew/main/install.ps1 | iex
+# Usage: irm https://raw.githubusercontent.com/solvemotive/shipcrew-ai/main/install.ps1 | iex
 param(
   [string]$Crew = $(if ($env:SHIPCREW_CREW) { $env:SHIPCREW_CREW } else { "ship-crew" }),
   [string]$InstallDir = $(Get-Location)

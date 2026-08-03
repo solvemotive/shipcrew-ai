@@ -13,13 +13,13 @@
     "claude",
     "cursor-rules"
   ],
-  "homepage": "https://github.com/solvemotive/shipcrew#readme",
+  "homepage": "https://github.com/solvemotive/shipcrew-ai#readme",
   "bugs": {
-    "url": "https://github.com/solvemotive/shipcrew/issues"
+    "url": "https://github.com/solvemotive/shipcrew-ai/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/solvemotive/shipcrew.git"
+    "url": "git+https://github.com/solvemotive/shipcrew-ai.git"
   },
   "license": "MIT",
   "author": "SolveMotive",
