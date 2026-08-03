@@ -1,20 +1,16 @@
 # shipcrew
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
-[![npm](https://img.shields.io/npm/v/shipcrew.svg)](https://www.npmjs.com/package/shipcrew)
-[![Cursor compatible](https://img.shields.io/badge/Cursor-.cursor%2Fagents-blue)](./docs/CURSOR.md)
-[![Claude Code compatible](https://img.shields.io/badge/Claude%20Code-.claude%2Fagents-purple)](./docs/CLAUDE.md)
-[![Stars](https://img.shields.io/github/stars/solvemotive/shipcrew?style=social)](https://github.com/solvemotive/shipcrew)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green?style=flat-square)](./LICENSE)
+[![npx](https://img.shields.io/badge/npx-shipcrew-black?style=flat-square)](https://github.com/solvemotive/shipcrew#quick-start)
+[![Cursor](https://img.shields.io/badge/Cursor-compatible-0A66C2?style=flat-square&logo=cursor&logoColor=white)](./docs/CURSOR.md)
+[![Claude Code](https://img.shields.io/badge/Claude%20Code-compatible-D97706?style=flat-square)](./docs/CLAUDE.md)
+[![GitHub stars](https://img.shields.io/github/stars/solvemotive/shipcrew?style=flat-square&logo=github)](https://github.com/solvemotive/shipcrew)
 
 **The AI crew that actually ships. For Cursor & Claude Code.**
 
 > Stop prompting. Command a crew.
 
 One command installs a full company of specialized AI agents that work natively in **Cursor** (`.cursor/rules`, `.cursor/agents`) and **Claude Code** (`.claude/agents`).
-
-![demo](docs/demo.gif)
-
-_Drop a short screen recording at `docs/demo.gif` — Captain planning with Navigator, then parallel specialists shipping a feature._
 
 ## Quick start
 
