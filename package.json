@@ -8,7 +8,6 @@
     "ai-agents",
     "subagents",
     "dev-team",
-    "shipcrew",
     "shipcrew-ai",
     "claude",
     "cursor-rules"
@@ -25,7 +24,6 @@
   "author": "SolveMotive",
   "type": "commonjs",
   "bin": {
-    "shipcrew": "bin/cli.js",
     "shipcrew-ai": "bin/cli.js"
   },
   "files": [

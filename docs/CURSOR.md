@@ -1,4 +1,4 @@
-# shipcrew + Cursor
+# shipcrew-ai + Cursor
 
 Run a full AI crew inside **Cursor Agent** — same specialists as Claude Code, installed to `.cursor/agents/` with an always-on rule.
 
@@ -18,7 +18,7 @@ After npm publish: `npx @solvemotive/shipcrew-ai init`.
 | Path | Role |
 |------|------|
 | `.cursor/agents/*.md` | Subagents you `@`-mention |
-| `.cursor/rules/shipcrew.mdc` | Routing cheat sheet (`alwaysApply`) |
+| `.cursor/rules/shipcrew-ai.mdc` | Routing cheat sheet (`alwaysApply`) |
 | `.claude/agents/` | Same crew for Claude Code (dual install) |
 | `CLAUDE.md` | Stack + Task\|Agent\|Notes (if manifests found) |
 
@@ -28,7 +28,7 @@ After npm publish: `npx @solvemotive/shipcrew-ai init`.
 
 ```text
 @captain Ship billing portal: list invoices, download PDF, update payment method.
-Follow shipcrew protocol: @navigator plan first, parallel specialists, then @gunner + @lookout.
+Follow shipcrew-ai protocol: @navigator plan first, parallel specialists, then @gunner + @lookout.
 ```
 
 ### Direct specialist (narrow work)

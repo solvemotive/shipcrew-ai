@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# shipcrew installer — macOS / Linux
+# shipcrew-ai installer — macOS / Linux
 # Usage: curl -fsSL https://raw.githubusercontent.com/solvemotive/shipcrew-ai/main/install.sh | bash
 set -euo pipefail
 
-REPO_URL="${SHIPCREW_REPO:-https://github.com/solvemotive/shipcrew-ai.git}"
-NPM_PKG="${SHIPCREW_NPM:-@solvemotive/shipcrew-ai}"
-CREW="${SHIPCREW_CREW:-ship-crew}"
-INSTALL_DIR="${SHIPCREW_DIR:-$(pwd)}"
+REPO_URL="${SHIPCREW_AI_REPO:-${SHIPCREW_REPO:-https://github.com/solvemotive/shipcrew-ai.git}}"
+NPM_PKG="${SHIPCREW_AI_NPM:-${SHIPCREW_NPM:-@solvemotive/shipcrew-ai}}"
+CREW="${SHIPCREW_AI_CREW:-${SHIPCREW_CREW:-ship-crew}}"
+INSTALL_DIR="${SHIPCREW_AI_DIR:-${SHIPCREW_DIR:-$(pwd)}}"
 
 BLUE='\033[0;36m'
 GREEN='\033[0;32m'
@@ -15,7 +15,7 @@ BOLD='\033[1m'
 NC='\033[0m'
 
 echo ""
-echo -e "${BLUE}  ⚓  shipcrew${NC}"
+echo -e "${BLUE}  ⚓  shipcrew-ai${NC}"
 echo -e "${DIM}  Stop prompting. Command a crew.${NC}"
 echo ""
 
@@ -46,7 +46,7 @@ install_from_git() {
   fi
   TMP=$(mktemp -d)
   trap 'rm -rf "$TMP"' EXIT
-  echo "  Fetching shipcrew from GitHub…"
+  echo "  Fetching shipcrew-ai from GitHub…"
   git clone --depth 1 "$REPO_URL" "$TMP/shipcrew-ai"
   run_cli "$TMP/shipcrew-ai/bin/cli.js"
 }
@@ -67,6 +67,6 @@ else
 fi
 
 echo ""
-echo -e "${GREEN}${BOLD}  ⚓ Shipcrew ready.${NC}"
+echo -e "${GREEN}${BOLD}  ⚓ Shipcrew-AI ready.${NC}"
 echo -e "  Try: ${BLUE}claude 'use @captain and build auth'${NC}"
 echo ""

@@ -1,4 +1,4 @@
-# shipcrew
+# shipcrew-ai
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-green?style=flat-square)](./LICENSE)
 [![npx](https://img.shields.io/badge/npx-github%3Asolvemotive%2Fshipcrew--ai-black?style=flat-square)](https://github.com/solvemotive/shipcrew-ai#quick-start)
@@ -8,7 +8,7 @@
 
 # Stop prompting. Command a crew.
 
-**shipcrew** is the AI dev team for **Cursor** and **Claude Code** — sixteen specialized agents, one Captain, and presets that match how real products ship.
+**shipcrew-ai** is the AI dev team for **Cursor** and **Claude Code** — sixteen specialized agents, one Captain, and presets that match how real products ship.
 
 ```bash
 npx --yes github:solvemotive/shipcrew-ai init
@@ -26,9 +26,9 @@ claude "use @captain and build auth"
 
 ---
 
-## Why shipcrew
+## Why shipcrew-ai
 
-| Solo AI | shipcrew |
+| Solo AI | shipcrew-ai |
 |---------|----------|
 | One model does architecture, code, security, and tests | Specialists with clear jobs and tool permissions |
 | Easy to skip threat modeling | **@gunner** is always read-only Opus security |
@@ -106,8 +106,8 @@ irm https://raw.githubusercontent.com/solvemotive/shipcrew-ai/main/install.ps1 |
 | `.claude/agents/` | Claude Code subagents |
 | `.claude/commands/` | `/ship`, `/crew` |
 | `.cursor/agents/` | Cursor agents |
-| `.cursor/rules/shipcrew.mdc` | Always-on routing rule |
-| `CLAUDE.md` | Shipcrew Configuration (Task \| Agent \| Notes) when a manifest is detected |
+| `.cursor/rules/shipcrew-ai.mdc` | Always-on routing rule |
+| `CLAUDE.md` | Shipcrew-AI Configuration (Task \| Agent \| Notes) when a manifest is detected |
 
 ---
 
@@ -212,7 +212,7 @@ npx --yes github:solvemotive/shipcrew-ai version
 | `--yes` / `-y` | Non-interactive (default crew `ship-crew` if omitted) |
 | `--force` / `-f` | Overwrite agents; prune ones not in the selected crew |
 
-Bins after install: `shipcrew` and `shipcrew-ai` (same CLI).
+CLI bin after install: **`shipcrew-ai`**.
 
 Package: **`@solvemotive/shipcrew-ai`** · Repo: **[solvemotive/shipcrew-ai](https://github.com/solvemotive/shipcrew-ai)**
 

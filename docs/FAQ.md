@@ -16,14 +16,13 @@ Or the shell installer (falls back to git clone):
 curl -fsSL https://raw.githubusercontent.com/solvemotive/shipcrew-ai/main/install.sh | bash
 ```
 
-### What’s the package vs product name?
+### What’s the official name?
 
 | Name | Meaning |
 |------|---------|
-| **shipcrew** | Product / brand / CLI banner |
-| **shipcrew-ai** | GitHub repo `solvemotive/shipcrew-ai` |
+| **shipcrew-ai** | Product brand, CLI (`shipcrew-ai`), and GitHub repo |
 | **@solvemotive/shipcrew-ai** | npm package |
-| **`shipcrew` / `shipcrew-ai` bins** | Same CLI entrypoint |
+| **`ship-crew`** | Full-roster team preset (not the product name) |
 
 ### Can I run `init` inside the shipcrew-ai repo?
 
@@ -61,7 +60,7 @@ Usually no — they deliver specs. Captain (or you) assigns `@boatswain` / `@car
 
 ### Are agents identical?
 
-Source prompts live in `agents/` and are copied to both `.cursor/agents/` and `.claude/agents/`. Claude Code honors `tools:` / `model:` frontmatter strictly; Cursor uses agents + the `shipcrew.mdc` rule — still `@`-mention the same names.
+Source prompts live in `agents/` and are copied to both `.cursor/agents/` and `.claude/agents/`. Claude Code honors `tools:` / `model:` frontmatter strictly; Cursor uses agents + the `shipcrew-ai.mdc` rule — still `@`-mention the same names.
 
 ### Slash commands in Cursor?
 
@@ -71,7 +70,7 @@ Source prompts live in `agents/` and are copied to both `.cursor/agents/` and `.
 
 ### Will `init` wipe my CLAUDE.md?
 
-No. It only replaces the block between `<!-- shipcrew:start -->` and `<!-- shipcrew:end -->`. Content outside is preserved.
+No. It only replaces the block between `<!-- shipcrew-ai:start -->` and `<!-- shipcrew-ai:end -->`. Content outside is preserved.
 
 ### Stack table looks wrong
 

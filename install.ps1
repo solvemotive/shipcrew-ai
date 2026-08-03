@@ -1,16 +1,16 @@
-# shipcrew installer — Windows PowerShell
+# shipcrew-ai installer — Windows PowerShell
 # Usage: irm https://raw.githubusercontent.com/solvemotive/shipcrew-ai/main/install.ps1 | iex
 param(
-  [string]$Crew = $(if ($env:SHIPCREW_CREW) { $env:SHIPCREW_CREW } else { "ship-crew" }),
+  [string]$Crew = $(if ($env:SHIPCREW_AI_CREW) { $env:SHIPCREW_AI_CREW } else { "ship-crew" }),
   [string]$InstallDir = $(Get-Location),
-  [string]$NpmPkg = $(if ($env:SHIPCREW_NPM) { $env:SHIPCREW_NPM } else { "@solvemotive/shipcrew-ai" }),
-  [string]$RepoUrl = $(if ($env:SHIPCREW_REPO) { $env:SHIPCREW_REPO } else { "https://github.com/solvemotive/shipcrew-ai.git" })
+  [string]$NpmPkg = $(if ($env:SHIPCREW_AI_NPM) { $env:SHIPCREW_AI_NPM } else { "@solvemotive/shipcrew-ai" }),
+  [string]$RepoUrl = $(if ($env:SHIPCREW_AI_REPO) { $env:SHIPCREW_AI_REPO } else { "https://github.com/solvemotive/shipcrew-ai.git" })
 )
 
 $ErrorActionPreference = "Stop"
 
 Write-Host ""
-Write-Host "  ⚓  shipcrew" -ForegroundColor Cyan
+Write-Host "  ⚓  shipcrew-ai" -ForegroundColor Cyan
 Write-Host "  Stop prompting. Command a crew." -ForegroundColor DarkGray
 Write-Host ""
 
@@ -35,7 +35,7 @@ function Install-FromGit {
     exit 1
   }
   $tmp = Join-Path ([System.IO.Path]::GetTempPath()) ("shipcrew-ai-" + [guid]::NewGuid().ToString())
-  Write-Host "  Fetching shipcrew from GitHub…"
+  Write-Host "  Fetching shipcrew-ai from GitHub…"
   git clone --depth 1 $RepoUrl $tmp
   Push-Location $InstallDir
   try {
@@ -71,6 +71,6 @@ try {
 }
 
 Write-Host ""
-Write-Host "  ⚓ Shipcrew ready." -ForegroundColor Green
+Write-Host "  ⚓ Shipcrew-AI ready." -ForegroundColor Green
 Write-Host "  Try: claude 'use @captain and build auth'" -ForegroundColor Cyan
 Write-Host ""

@@ -1,10 +1,10 @@
 ---
-description: Command the shipcrew Captain to plan and ship a feature end-to-end
+description: Command the shipcrew-ai Captain to plan and ship a feature end-to-end
 ---
 
 # /ship
 
-You are sailing with **shipcrew**. Treat this invocation as an order to **@captain**.
+You are sailing with **shipcrew-ai**. Treat this invocation as an order to **@captain**.
 
 ## Orders
 
@@ -22,4 +22,4 @@ $ARGUMENTS
 
 - Only Captain spawns agents.
 - Prefer repo conventions over greenfield stack choices.
-- If stack routing is unclear, use **@team-configurator** or read `CLAUDE.md` → Shipcrew Configuration.
+- If stack routing is unclear, use **@team-configurator** or read `CLAUDE.md` → Shipcrew-AI Configuration.

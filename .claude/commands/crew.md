@@ -1,5 +1,5 @@
 ---
-description: Inspect installed shipcrew agents, pick a crew, or ask Captain who should handle a task
+description: Inspect installed shipcrew-ai agents, pick a crew, or ask Captain who should handle a task
 ---
 
 # /crew
@@ -8,7 +8,7 @@ $ARGUMENTS
 
 ## Intent
 
-Help the user work with their installed **shipcrew** agents.
+Help the user work with their installed **shipcrew-ai** agents.
 
 ## Behavior
 

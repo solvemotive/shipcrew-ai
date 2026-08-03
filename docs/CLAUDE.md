@@ -1,6 +1,6 @@
-# shipcrew + Claude Code
+# shipcrew-ai + Claude Code
 
-Install shipcrew as **Claude Code subagents** under `.claude/agents/`, plus slash commands `/ship` and `/crew`.
+Install shipcrew-ai as **Claude Code subagents** under `.claude/agents/`, plus slash commands `/ship` and `/crew`.
 
 ## Install
 
@@ -19,8 +19,8 @@ After npm publish: `npx @solvemotive/shipcrew-ai init`.
 | `.claude/agents/*.md` | Subagents (`name:` frontmatter = `@name`) |
 | `.claude/commands/ship.md` | `/ship …` → Captain voyage |
 | `.claude/commands/crew.md` | `/crew …` → roster help / routing |
-| `.cursor/agents/` + `shipcrew.mdc` | Same crew for Cursor |
-| `CLAUDE.md` | `<!-- shipcrew:start -->` configuration block |
+| `.cursor/agents/` + `shipcrew-ai.mdc` | Same crew for Cursor |
+| `CLAUDE.md` | `<!-- shipcrew-ai:start -->` configuration block |
 
 ## Usage
 
@@ -61,16 +61,16 @@ claude "use @navigator and chart a plan for migrating to App Router"
 `init` upserts:
 
 ```html
-<!-- shipcrew:start -->
-## Shipcrew Configuration
+<!-- shipcrew-ai:start -->
+## Shipcrew-AI Configuration
 …
-<!-- shipcrew:end -->
+<!-- shipcrew-ai:end -->
 ```
 
 Refresh without a full re-init:
 
 ```text
-use @team-configurator and update Shipcrew Configuration for this monorepo
+use @team-configurator and update Shipcrew-AI Configuration for this monorepo
 ```
 
 Do not hand-edit inside the markers unless you know you’ll overwrite on next `init`.

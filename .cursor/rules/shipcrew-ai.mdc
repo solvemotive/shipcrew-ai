@@ -1,14 +1,14 @@
 ---
-description: Shipcrew — orchestrate specialized AI crew members for Cursor Agent
+description: Shipcrew-AI — orchestrate specialized AI crew members for Cursor Agent
 globs:
 alwaysApply: true
 ---
 
-# shipcrew
+# shipcrew-ai
 
 Stop prompting. Command a crew.
 
-You have access to specialized shipcrew agents in `.cursor/agents/`. Prefer them over doing everything solo when the task spans architecture, implementation, security, or QA.
+You have access to specialized shipcrew-ai agents in `.cursor/agents/`. Prefer them over doing everything solo when the task spans architecture, implementation, security, or QA.
 
 ## Command structure
 

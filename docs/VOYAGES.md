@@ -1,6 +1,6 @@
 # Voyages — prompt playbooks
 
-Ready-to-run prompts for shipcrew. Replace bracketed bits. Prefer **@captain** for anything that spans more than one concern.
+Ready-to-run prompts for shipcrew-ai. Replace bracketed bits. Prefer **@captain** for anything that spans more than one concern.
 
 ## Feature shipping
 
@@ -75,7 +75,7 @@ Hand implementers concrete owners (@boatswain / @carpenter-next / @data-master).
 ```text
 @captain Bootstrap a [Next.js/Node] app for [product one-liner].
 Use launch-crew style: plan, app shell, Tailwind baseline, CI stub, README.
-@team-configurator writes Shipcrew Configuration when package.json exists.
+@team-configurator writes Shipcrew-AI Configuration when package.json exists.
 ```
 
 ## Legacy modernization
