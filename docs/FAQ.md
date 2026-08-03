@@ -2,20 +2,29 @@
 
 ## Install & package
 
-### `npx @solvemotive/shipcrew-ai` fails
+### `npx @solvemotive/shipcrew-ai` fails / “package not found or too new”
 
-The npm package may not be published yet. Use GitHub:
+The package is on npm (`@solvemotive/shipcrew-ai`). If install fails right after a release, you likely have a **minimum release age** gate (pnpm 11, npm `min-release-age`, Yarn Berry age gate, or a corporate mirror). Wait ~24h, or bypass:
 
 ```bash
-npx --yes github:solvemotive/shipcrew-ai init
+npm install @solvemotive/shipcrew-ai --min-release-age=0
+# or
+pnpm add @solvemotive/shipcrew-ai --config.minimumReleaseAge=0
 ```
 
-Or the shell installer (falls back to git clone):
+Or skip the registry and install from GitHub:
+
+```bash
+npx --yes github:solvemotive/shipcrew-ai init ship-crew
+```
+
+Shell installer (npm → GitHub → git clone):
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/solvemotive/shipcrew-ai/main/install.sh | bash
 ```
 
+Also confirm the scoped name: `@solvemotive/shipcrew-ai` (not bare `shipcrew`).
 ### What’s the official name?
 
 | Name | Meaning |

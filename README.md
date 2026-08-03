@@ -78,28 +78,23 @@ flowchart LR
 
 ### 1. Install into your project
 
-Works today from GitHub:
-
 ```bash
 cd your-app
-npx --yes github:solvemotive/shipcrew-ai init
-```
-
-Pick a crew interactively, or pass one:
-
-```bash
-npx --yes github:solvemotive/shipcrew-ai init saas-crew
-```
-
-Presets: `indie-crew` · `bug-hunt-crew` · `launch-crew` · `polyglot-crew` · `ship-crew`
-
-After npm publish you can also use:
-
-```bash
 npx @solvemotive/shipcrew-ai init ship-crew
+```
+
+Pick a crew interactively, or pass one (`indie-crew` · `bug-hunt-crew` · `launch-crew` · `polyglot-crew` · `ship-crew`):
+
+```bash
+npx @solvemotive/shipcrew-ai init saas-crew
 npx @solvemotive/shipcrew-ai run "Ship auth"
 ```
 
+If your package manager blocks brand-new publishes (“not found” / “too new”), wait ~24h, pass `--min-release-age=0`, or install from GitHub:
+
+```bash
+npx --yes github:solvemotive/shipcrew-ai init ship-crew
+```
 **Shell installers** (npm → GitHub → git clone fallbacks):
 
 ```bash
