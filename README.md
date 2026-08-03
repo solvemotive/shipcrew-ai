@@ -94,7 +94,8 @@ Presets: `indie-crew` · `bug-hunt-crew` · `launch-crew` · `polyglot-crew` · 
 After npm publish you can also use:
 
 ```bash
-npx @solvemotive/shipcrew-ai init
+npx @solvemotive/shipcrew-ai init ship-crew
+npx @solvemotive/shipcrew-ai run "Ship auth"
 ```
 
 **Shell installers** (npm → GitHub → git clone fallbacks):
