@@ -2,6 +2,43 @@
 
 Ready-to-run prompts for shipcrew-ai. Replace bracketed bits. Prefer **@captain** for anything that spans more than one concern.
 
+## Stack specialists
+
+### NestJS API
+
+```text
+@captain Add a NestJS module for [feature] with guards and DTO validation.
+Prefer @helmsman for implementation; @navigator plans first; @gunner before ship.
+```
+
+### Laravel feature
+
+```text
+@captain Ship [feature] on Laravel with policy + form request + tests.
+Use @sailmaker; @data-master if migrations are non-trivial.
+```
+
+### Spring Boot service
+
+```text
+@captain Implement [endpoint] in Spring Boot with Security + Data JPA.
+Delegate @ironwright; @gunner on security config.
+```
+
+### React Native screen
+
+```text
+@captain Add [screen] on React Native/Expo with navigation and secure token storage.
+Use @outrigger; @design-mate for UI tokens if needed.
+```
+
+### Smart contract + dapp hook
+
+```text
+@captain Add [contract method] + frontend write flow.
+@chainlocker owns contracts/tests; carpenter/outrigger for UI; @gunner mandatory.
+```
+
 ## Feature shipping
 
 ### Auth

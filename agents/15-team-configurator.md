@@ -22,12 +22,15 @@ Scan the repository for language/framework manifests, infer the operating stack,
 
 ## Detection checklist
 
-1. Node: `package.json` deps → Next/React/Vue/Nest/Express/etc.; Prisma/Drizzle; tsconfig.
-2. Go: `go.mod` module path and major libs.
-3. Python: `requirements.txt`, `pyproject.toml`, Django/FastAPI signals.
-4. Rust: `Cargo.toml` targets.
-5. Infra: Dockerfile, compose, `.github/workflows`.
-6. Apps in `apps/` / `packages/` for monorepos.
+1. Node: `package.json` deps → Next/React/Vue/Nest/Express/React Native/Expo; Prisma/Drizzle; tsconfig.
+2. PHP: `composer.json` → Laravel (`artisan`) vs general PHP → route `@sailmaker` vs `@steward`.
+3. JVM: `pom.xml` / `build.gradle` → Spring Boot → `@ironwright`.
+4. Go: `go.mod` module path and major libs.
+5. Python: `requirements.txt`, `pyproject.toml`, Django/FastAPI signals.
+6. Rust: `Cargo.toml` targets.
+7. Blockchain: `foundry.toml`, `hardhat.config.*`, `anchor.toml`, wagmi/viem → `@chainlocker`.
+8. Infra: Dockerfile, compose, `.github/workflows`.
+9. Apps in `apps/` / `packages/` for monorepos.
 
 ## CLAUDE.md section format (mandatory)
 
@@ -65,6 +68,13 @@ Scan the repository for language/framework manifests, infer the operating stack,
 | Legacy exploration | @code-archaeologist | Before big changes |
 | Database / schema | @data-master | … |
 | UI/UX + Tailwind | @design-mate | … |
+| Node.js | @deckhand | Express/Fastify/Hono |
+| NestJS | @helmsman | Modules / DI / guards |
+| PHP | @steward | Composer libraries & general PHP |
+| Laravel | @sailmaker | Eloquent / Artisan |
+| Spring Boot | @ironwright | Java/Kotlin |
+| Blockchain / web3 | @chainlocker | Contracts & wallet flows |
+| React Native | @outrigger | Expo / bare RN |
 | Refresh this config | @team-configurator | Re-run on stack change |
 
 ### Project-specific notes

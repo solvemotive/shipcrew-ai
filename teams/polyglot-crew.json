@@ -1,0 +1,17 @@
+{
+  "name": "polyglot-crew",
+  "description": "Stack specialists — Node, Nest, PHP, Laravel, Spring, Blockchain, React Native (+ captain/navigator/gunner/lookout)",
+  "agents": [
+    "captain",
+    "navigator",
+    "deckhand",
+    "helmsman",
+    "steward",
+    "sailmaker",
+    "ironwright",
+    "chainlocker",
+    "outrigger",
+    "gunner",
+    "lookout"
+  ]
+}

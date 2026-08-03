@@ -38,6 +38,13 @@ You have access to specialized shipcrew-ai agents in `.cursor/agents/`. Prefer t
 | DB / Prisma / Drizzle | @data-master |
 | UI/UX + Tailwind | @design-mate |
 | Update CLAUDE.md stack section | @team-configurator |
+| Node.js | @deckhand |
+| NestJS | @helmsman |
+| PHP | @steward |
+| Laravel | @sailmaker |
+| Spring Boot | @ironwright |
+| Blockchain / web3 | @chainlocker |
+| React Native | @outrigger |
 
 ## Style
 

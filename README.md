@@ -8,7 +8,7 @@
 
 # Stop prompting. Command a crew.
 
-**shipcrew-ai** is the AI dev team for **Cursor** and **Claude Code** — sixteen specialized agents, one Captain, and presets that match how real products ship.
+**shipcrew-ai** is the AI dev team for **Cursor** and **Claude Code** — twenty-three specialized agents, one Captain, and presets that match how real products ship.
 
 ```bash
 npx --yes github:solvemotive/shipcrew-ai init
@@ -75,6 +75,8 @@ Pick a crew interactively, or pass one:
 npx --yes github:solvemotive/shipcrew-ai init saas-crew
 ```
 
+Presets: `indie-crew` · `bug-hunt-crew` · `launch-crew` · `polyglot-crew` · `ship-crew`
+
 After npm publish you can also use:
 
 ```bash
@@ -119,7 +121,8 @@ irm https://raw.githubusercontent.com/solvemotive/shipcrew-ai/main/install.ps1 |
 | **indie-crew** | 4 | Solo / small teams | captain, carpenter-next, design-mate, quartermaster |
 | **bug-hunt-crew** | 4 | Incidents & regressions | captain, surgeon, lookout, gunner |
 | **launch-crew** | 7 | Greenfield scaffolding | captain, navigator, carpenter-next, design-mate, quartermaster, cartographer, team-configurator |
-| **ship-crew** | 16 | Full coverage | entire roster |
+| **ship-crew** | 23 | Full coverage | entire roster |
+| **polyglot-crew** | 11 | Multi-stack specialists | Node, Nest, PHP, Laravel, Spring, chain, RN + core |
 
 ```bash
 npx --yes github:solvemotive/shipcrew-ai list
@@ -130,7 +133,7 @@ npx --yes github:solvemotive/shipcrew-ai init bug-hunt-crew --force
 
 ---
 
-## Crew roster (16)
+## Crew roster (23)
 
 | Agent | Role | Model | Mutates repo? |
 |-------|------|-------|---------------|
@@ -150,6 +153,13 @@ npx --yes github:solvemotive/shipcrew-ai init bug-hunt-crew --force
 | **@data-master** | SQL, Prisma, Drizzle | sonnet | No (specs) |
 | **@design-mate** | UI/UX + Tailwind | sonnet | No (specs) |
 | **@team-configurator** | Stack detect → CLAUDE.md | sonnet | Yes |
+| **@deckhand** | Node.js (Express/Fastify/Hono) | sonnet | Yes |
+| **@helmsman** | NestJS | sonnet | Yes |
+| **@steward** | PHP | sonnet | Yes |
+| **@sailmaker** | Laravel | sonnet | Yes |
+| **@ironwright** | Spring Boot (Java/Kotlin) | sonnet | Yes |
+| **@chainlocker** | Blockchain / web3 | sonnet | Yes |
+| **@outrigger** | React Native / Expo | sonnet | Yes |
 
 ---
 

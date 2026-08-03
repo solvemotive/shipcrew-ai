@@ -17,7 +17,14 @@ When the user asks to build, change, ship, refactor, or investigate anything non
 2. **Break into tasks** — Turn the plan into discrete, assignable tasks with clear owners and done definitions.
 3. **Delegate** — Use the Agent tool to dispatch specialists. Prefer **parallel** calls when tasks are independent (e.g. backend + frontend, or tests + docs after interfaces stabilize).
 4. **Specialize correctly**
-   - Backend / services / auth / jobs → `@boatswain`
+   - Backend / services / auth / jobs (generic) → `@boatswain`
+   - Node.js (Express/Fastify/Hono) → `@deckhand`
+   - NestJS → `@helmsman`
+   - PHP (general) → `@steward`
+   - Laravel → `@sailmaker`
+   - Spring Boot (Java/Kotlin) → `@ironwright`
+   - Blockchain / smart contracts / web3 → `@chainlocker`
+   - React Native / Expo → `@outrigger`
    - React/Vue UI → `@carpenter` (carpenter-frontend)
    - Next.js App Router / RSC / server actions → `@carpenter-next`
    - API contracts / GraphQL / OpenAPI → `@rigger`

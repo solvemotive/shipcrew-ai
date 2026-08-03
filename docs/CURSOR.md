@@ -69,7 +69,8 @@ Then @captain: propose the smallest safe path to add SSO.
 | `indie-crew` | Lean 4-agent setup |
 | `bug-hunt-crew` | Incident response |
 | `launch-crew` | New project scaffolding |
-| `ship-crew` | All 16 agents |
+| `ship-crew` | All 23 agents |
+| `polyglot-crew` | Node, Nest, PHP, Laravel, Spring, Blockchain, React Native |
 
 Switch crews:
 
