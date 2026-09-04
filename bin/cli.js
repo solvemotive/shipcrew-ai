@@ -7,6 +7,8 @@ const readline = require('readline');
 const {
   toCursorAgent,
   ensureShipcrewDir,
+  writeInstalledCrew,
+  readInstalledCrew,
   readVoyage,
   startVoyage,
   parseVoyageFields,
@@ -75,6 +77,7 @@ ${Object.entries(TEAMS)
 Examples:
   npx --yes github:solvemotive/shipcrew-ai init ship-crew
   npx @solvemotive/shipcrew-ai run "Ship team invites with RBAC"
+  npx @solvemotive/shipcrew-ai run --crew indie-crew "Ship auth"
   npx @solvemotive/shipcrew-ai status
   npx @solvemotive/shipcrew-ai resume
 `);
@@ -580,6 +583,8 @@ async function cmdInit(args) {
   if (tpl.length) {
     log(`  ${c('green', '✓')} .shipcrew/ autopilot templates (${tpl.map((t) => t.file).join(', ')})`);
   }
+  writeInstalledCrew(cwd, crewName);
+  log(`  ${c('green', '✓')} .shipcrew/crew.json → ${crewName}`);
 
   const stack = detectStack(cwd);
   let configStatus = null;
@@ -614,9 +619,27 @@ function cmdRun(args) {
   banner();
   const cwd = process.cwd();
   const force = args.includes('--force') || args.includes('-f');
-  const goal = args.filter((a) => !a.startsWith('-')).join(' ').trim();
+
+  let crewOverride = null;
+  const positional = [];
+  for (let i = 0; i < args.length; i += 1) {
+    const a = args[i];
+    if (a === '--crew') {
+      crewOverride = args[i + 1];
+      i += 1;
+      continue;
+    }
+    if (a.startsWith('--crew=')) {
+      crewOverride = a.slice('--crew='.length);
+      continue;
+    }
+    if (a.startsWith('-')) continue;
+    positional.push(a);
+  }
+
+  const goal = positional.join(' ').trim();
   if (!goal) {
-    log(c('red', '  Usage: shipcrew-ai run "<goal>"'));
+    log(c('red', '  Usage: shipcrew-ai run [--crew <name>] "<goal>"'));
     process.exit(1);
   }
 
@@ -629,11 +652,23 @@ function cmdRun(args) {
     process.exit(1);
   }
 
-  const { id, path: vpath } = startVoyage(cwd, { goal, source: 'cli', crew: 'ship-crew' });
+  if (crewOverride && !TEAMS[crewOverride]) {
+    log(c('red', `  Unknown crew: ${crewOverride}`));
+    log(`  Available: ${Object.keys(TEAMS).join(', ')}`);
+    process.exit(1);
+  }
+
+  const crew = crewOverride || readInstalledCrew(cwd) || 'ship-crew';
+  if (crewOverride) {
+    writeInstalledCrew(cwd, crew);
+  }
+
+  const { id, path: vpath } = startVoyage(cwd, { goal, source: 'cli', crew });
   const prompt = buildAutopilotPrompt(goal);
 
   log(c('green', c('bold', '  ⚓ Autopilot voyage started')));
   log(`  id: ${id}`);
+  log(`  crew: ${crew}`);
   log(`  file: ${c('cyan', vpath)}`);
   log('');
   log(c('bold', '  Paste into Claude Code / Cursor:'));
