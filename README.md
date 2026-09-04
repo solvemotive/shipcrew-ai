@@ -231,16 +231,20 @@ Use launch-crew specialists. @cartographer should draft README setup.
 ## CLI reference
 
 ```bash
-npx --yes github:solvemotive/shipcrew-ai init [crew] [--force] [--yes]
-npx --yes github:solvemotive/shipcrew-ai list
-npx --yes github:solvemotive/shipcrew-ai help
-npx --yes github:solvemotive/shipcrew-ai version
+npx @solvemotive/shipcrew-ai init [crew] [--force] [--yes]
+npx @solvemotive/shipcrew-ai run [--crew <name>] [--force] "<goal>"
+npx @solvemotive/shipcrew-ai status
+npx @solvemotive/shipcrew-ai resume
+npx @solvemotive/shipcrew-ai list
+npx @solvemotive/shipcrew-ai help
+npx @solvemotive/shipcrew-ai version
 ```
 
 | Flag | Meaning |
 |------|---------|
-| `--yes` / `-y` | Non-interactive (default crew `ship-crew` if omitted) |
-| `--force` / `-f` | Overwrite agents; prune ones not in the selected crew |
+| `--yes` / `-y` | Non-interactive init (default crew `ship-crew` if omitted) |
+| `--force` / `-f` | Init: overwrite/prune agents. Run: replace an `in_progress` voyage |
+| `--crew <name>` | Run: override crew (also updates `.shipcrew/crew.json`) |
 
 CLI bin after install: **`shipcrew-ai`**.
 
