@@ -58,13 +58,31 @@ test('run + status + resume voyage lifecycle', () => {
   assert.equal(run.status, 0, run.stdout);
   assert.match(run.stdout, /Autopilot voyage started/);
   assert.match(run.stdout, /AUTOPILOT MODE/);
+  assert.match(run.stdout, /crew: indie-crew/);
+  const voyage = fs.readFileSync(path.join(dir, '.shipcrew', 'voyage.yml'), 'utf8');
+  assert.match(voyage, /^crew:\s*indie-crew\s*$/m);
+  const crewJson = JSON.parse(fs.readFileSync(path.join(dir, '.shipcrew', 'crew.json'), 'utf8'));
+  assert.equal(crewJson.crew, 'indie-crew');
   const st = runCli(dir, ['status']);
   assert.equal(st.status, 0);
   assert.match(st.stdout, /status:\s+in_progress/);
   assert.match(st.stdout, /Ship auth/);
+  assert.match(st.stdout, /indie-crew/);
   const rs = runCli(dir, ['resume']);
   assert.equal(rs.status, 0);
   assert.match(rs.stdout, /RESUME AUTOPILOT/);
+});
+
+test('run --crew overrides installed crew', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'shipcrew-crew-'));
+  fs.writeFileSync(path.join(dir, 'package.json'), '{"name":"x"}');
+  runCli(dir, ['init', 'indie-crew', '--yes']);
+  const run = runCli(dir, ['run', '--force', '--crew', 'bug-hunt-crew', 'Fix', 'flaky', 'test']);
+  assert.equal(run.status, 0, run.stdout);
+  const voyage = fs.readFileSync(path.join(dir, '.shipcrew', 'voyage.yml'), 'utf8');
+  assert.match(voyage, /^crew:\s*bug-hunt-crew\s*$/m);
+  const crewJson = JSON.parse(fs.readFileSync(path.join(dir, '.shipcrew', 'crew.json'), 'utf8'));
+  assert.equal(crewJson.crew, 'bug-hunt-crew');
 });
 
 test('startVoyage writes parseable fields', () => {

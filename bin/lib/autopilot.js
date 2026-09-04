@@ -57,6 +57,35 @@ function voyagePath(cwd) {
   return path.join(cwd, '.shipcrew', 'voyage.yml');
 }
 
+function crewConfigPath(cwd) {
+  return path.join(cwd, '.shipcrew', 'crew.json');
+}
+
+/** Persist the crew selected by `init` so `run` can reuse it. */
+function writeInstalledCrew(cwd, crew) {
+  const dest = path.join(cwd, '.shipcrew');
+  ensureDir(dest);
+  const payload = {
+    crew: crew || 'ship-crew',
+    updated_at: isoNow(),
+  };
+  fs.writeFileSync(crewConfigPath(cwd), `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
+  return payload.crew;
+}
+
+/** Last crew from init, or null if missing/invalid. */
+function readInstalledCrew(cwd) {
+  const p = crewConfigPath(cwd);
+  if (!fs.existsSync(p)) return null;
+  try {
+    const data = JSON.parse(fs.readFileSync(p, 'utf8'));
+    const crew = typeof data.crew === 'string' ? data.crew.trim() : '';
+    return crew || null;
+  } catch {
+    return null;
+  }
+}
+
 function ensureShipcrewDir(cwd, templatesRoot, force) {
   const dest = path.join(cwd, '.shipcrew');
   ensureDir(dest);
@@ -154,10 +183,13 @@ module.exports = {
   toCursorAgent,
   READONLY_AGENTS,
   ensureShipcrewDir,
+  writeInstalledCrew,
+  readInstalledCrew,
   readVoyage,
   writeVoyage,
   startVoyage,
   parseVoyageFields,
   buildAutopilotPrompt,
   voyagePath,
+  crewConfigPath,
 };
