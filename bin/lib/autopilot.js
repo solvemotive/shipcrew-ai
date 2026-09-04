@@ -155,10 +155,23 @@ summary: ""
 
 function parseVoyageFields(raw) {
   if (!raw) return null;
+  const parseScalar = (value) => {
+    const v = String(value || '').trim();
+    if (!v) return '';
+    // Values written with JSON.stringify (goal, source, quoted ids/timestamps)
+    if (v.startsWith('"')) {
+      try {
+        return JSON.parse(v);
+      } catch {
+        return v.replace(/^"|"$/g, '');
+      }
+    }
+    return v;
+  };
   const get = (key) => {
     const m = raw.match(new RegExp(`^${key}:\\s*(.*)$`, 'm'));
     if (!m) return '';
-    return m[1].trim().replace(/^"|"$/g, '');
+    return parseScalar(m[1]);
   };
   return {
     id: get('id'),

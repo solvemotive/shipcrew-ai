@@ -95,6 +95,34 @@ test('startVoyage writes parseable fields', () => {
   assert.match(buildAutopilotPrompt('X'), /Mission: X/);
 });
 
+test('parseVoyageFields round-trips goals with quotes', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'shipcrew-quote-'));
+  const goal = 'Ship "auth" with RBAC';
+  startVoyage(dir, { goal, source: 'cli', crew: 'saas-crew' });
+  const raw = fs.readFileSync(path.join(dir, '.shipcrew', 'voyage.yml'), 'utf8');
+  assert.match(raw, /goal: "Ship \\"auth\\" with RBAC"/);
+  const v = parseVoyageFields(raw);
+  assert.equal(v.goal, goal);
+  assert.equal(v.source, 'cli');
+  assert.doesNotMatch(v.goal, /\\"/);
+});
+
+test('run status resume preserve quoted goals', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'shipcrew-quote-cli-'));
+  fs.writeFileSync(path.join(dir, 'package.json'), '{"name":"x"}');
+  runCli(dir, ['init', 'indie-crew', '--yes']);
+  const goal = 'Ship "auth" with RBAC';
+  const run = runCli(dir, ['run', '--force', goal]);
+  assert.equal(run.status, 0, run.stdout);
+  const st = runCli(dir, ['status']);
+  assert.equal(st.status, 0);
+  assert.match(st.stdout, /Ship "auth" with RBAC/);
+  assert.doesNotMatch(st.stdout, /Ship \\+"auth\\+" with RBAC/);
+  const rs = runCli(dir, ['resume']);
+  assert.equal(rs.status, 0);
+  assert.match(rs.stdout, /Continue mission: Ship "auth" with RBAC/);
+});
+
 test('unknown crew fails', () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'shipcrew-bad-'));
   const res = runCli(dir, ['init', 'nope', '--yes']);
