@@ -68,6 +68,7 @@ Commands:
   ${c('green', 'resume')}            Print resume prompt for current voyage
   ${c('green', 'list')}              List crews and agents
   ${c('green', 'help')}              Show this help
+  ${c('green', 'version')}           Print package version
 
 Crews:
 ${Object.entries(TEAMS)
