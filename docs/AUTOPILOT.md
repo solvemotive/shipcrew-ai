@@ -38,7 +38,9 @@ shipcrew-ai resume         # continue in_progress voyage
 2. Action opens branch `autopilot/issue-N` with `.shipcrew/voyage.yml` + PR
 3. Comment posts the exact `/autopilot` instructions
 
-Workflow: `.github/workflows/autopilot-issue.yml` (copy into your app repo, or use from this template).
+Workflow: [`.github/workflows/autopilot-issue.yml`](../.github/workflows/autopilot-issue.yml) (copy into your app repo).
+
+**Prereq:** run `npx @solvemotive/shipcrew-ai init` in the app first so `.shipcrew/policy.md` and `.shipcrew/dod.md` already exist. The workflow **keeps** those files; it only falls back to `templates/shipcrew/*` (shipcrew-ai source tree) or a minimal stub if they are missing. It never overwrites an existing policy/DoD. Crew comes from `.shipcrew/crew.json` when present.
 
 ## Cursor transform
 

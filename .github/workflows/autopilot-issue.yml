@@ -34,17 +34,78 @@ jobs:
           git checkout -B "$BRANCH"
 
           mkdir -p .shipcrew
-          if [ -f templates/shipcrew/policy.md ]; then cp templates/shipcrew/policy.md .shipcrew/policy.md; fi
-          if [ -f templates/shipcrew/dod.md ]; then cp templates/shipcrew/dod.md .shipcrew/dod.md; fi
 
-          GOAL="$ISSUE_TITLE"
+          # Prefer policy/DoD already installed by `shipcrew-ai init` (.shipcrew/*).
+          # Only seed from package templates when those files are missing (shipcrew-ai source repo).
+          # If still missing (typical app repo without templates/), write a minimal stub so gates exist.
+          seed_shipcrew_file() {
+            local name="$1"
+            local dest=".shipcrew/${name}"
+            local tmpl="templates/shipcrew/${name}"
+            if [ -f "$dest" ]; then
+              echo "Keeping existing ${dest}"
+              return 0
+            fi
+            if [ -f "$tmpl" ]; then
+              cp "$tmpl" "$dest"
+              echo "Seeded ${dest} from ${tmpl}"
+              return 0
+            fi
+            return 1
+          }
+
+          if ! seed_shipcrew_file policy.md; then
+            cat > .shipcrew/policy.md <<'POLICY'
+          # shipcrew-ai policy (autopilot)
+
+          Seeded by the GitHub autopilot workflow because `.shipcrew/policy.md` was missing.
+          Prefer running `npx @solvemotive/shipcrew-ai init` so the full policy template is installed.
+
+          ## Mandatory gates
+
+          | Condition | Required agents |
+          |-----------|-----------------|
+          | Auth, sessions, API keys, multi-tenant, payments | @gunner, @lookout |
+          | Public APIs | @rigger then @gunner |
+          | CI / deploy | @quartermaster |
+
+          ## Rules
+
+          - @captain orchestrates only; no app code from Captain
+          - Do not mark voyage `shipped` until `.shipcrew/dod.md` is satisfied
+          POLICY
+            node -e 'const fs=require("fs");let s=fs.readFileSync(".shipcrew/policy.md","utf8");s=s.split("\n").map(l=>l.replace(/^          /,"")).join("\n");fs.writeFileSync(".shipcrew/policy.md",s);'
+            echo "Wrote minimal .shipcrew/policy.md stub"
+          fi
+
+          if ! seed_shipcrew_file dod.md; then
+            cat > .shipcrew/dod.md <<'DOD'
+          # Definition of Done (autopilot)
+
+          Seeded by the GitHub autopilot workflow because `.shipcrew/dod.md` was missing.
+          Prefer `npx @solvemotive/shipcrew-ai init` for the full checklist.
+
+          - [ ] Acceptance criteria met
+          - [ ] Happy path works
+          - [ ] @gunner / @lookout done when policy requires (or N/A documented)
+          - [ ] No secrets committed
+          DOD
+            node -e 'const fs=require("fs");let s=fs.readFileSync(".shipcrew/dod.md","utf8");s=s.split("\n").map(l=>l.replace(/^          /,"")).join("\n");fs.writeFileSync(".shipcrew/dod.md",s);'
+            echo "Wrote minimal .shipcrew/dod.md stub"
+          fi
+
+          CREW="ship-crew"
+          if [ -f .shipcrew/crew.json ]; then
+            CREW="$(node -e 'try{const c=JSON.parse(require("fs").readFileSync(".shipcrew/crew.json","utf8")).crew;process.stdout.write((typeof c==="string"&&c.trim())||"ship-crew")}catch{process.stdout.write("ship-crew")}')"
+          fi
+
           NOW="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
           cat > .shipcrew/voyage.yml <<EOF
           # Autopilot voyage from GitHub issue #${ISSUE_NUMBER}
           id: "issue-${ISSUE_NUMBER}"
           goal: $(node -p 'JSON.stringify(process.env.ISSUE_TITLE || "")')
           status: in_progress
-          crew: ship-crew
+          crew: ${CREW}
           created_at: "${NOW}"
           updated_at: "${NOW}"
           source: "github-issue"
