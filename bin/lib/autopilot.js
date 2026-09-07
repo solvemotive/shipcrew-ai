@@ -40,8 +40,8 @@ function toCursorAgent(content) {
     READONLY_AGENTS.has(name) ||
     (tools && !/\b(Write|Edit|Bash)\b/i.test(tools));
 
-  // Cursor: inherit | fast — map opus to inherit (highest available to user)
-  const cursorModel = model === 'sonnet' || model === 'fast' ? 'inherit' : 'inherit';
+  // Cursor: inherit | fast — map fast to fast, others/opus/sonnet to inherit
+  const cursorModel = model === 'fast' ? 'fast' : 'inherit';
 
   const lines = ['---', `name: ${name}`, `description: ${description}`];
   if (readonly) lines.push('readonly: true');

@@ -21,8 +21,6 @@ jobs:
         run: |
           diff -rq agents .claude/agents
           test "$(ls agents/*.md | wc -l)" -eq "$(ls .cursor/agents/*.md | wc -l)"
-          # Cursor copies must be transformed (no tools: frontmatter)
-          ! grep -q '^tools:' .cursor/agents/06-gunner-security.md
-          grep -q 'readonly: true' .cursor/agents/06-gunner-security.md
+          node --test --test-name-pattern='^all 23 \.cursor/agents/\*\.md files match toCursorAgent\(agents/\*\.md\)$' test/cli.test.js
       - name: Pack dry-run
         run: npm pack --dry-run
