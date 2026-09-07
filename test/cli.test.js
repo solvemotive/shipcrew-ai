@@ -35,6 +35,45 @@ test('toCursorAgent allows writers without readonly', () => {
   assert.doesNotMatch(out, /readonly: true/);
 });
 
+test('toCursorAgent maps model correctly (fast -> fast, sonnet/opus/others -> inherit)', () => {
+  const fastAgent = '---\nname: fast-agent\nmodel: fast\ntools: Read, Edit\n---\nFast instructions';
+  const fastOut = toCursorAgent(fastAgent);
+  assert.match(fastOut, /^model: fast$/m);
+
+  const sonnetAgent = '---\nname: sonnet-agent\nmodel: sonnet\ntools: Read, Edit\n---\nSonnet instructions';
+  const sonnetOut = toCursorAgent(sonnetAgent);
+  assert.match(sonnetOut, /^model: inherit$/m);
+
+  const opusAgent = '---\nname: opus-agent\nmodel: opus\ntools: Read, Edit\n---\nOpus instructions';
+  const opusOut = toCursorAgent(opusAgent);
+  assert.match(opusOut, /^model: inherit$/m);
+
+  const unknownAgent = '---\nname: other-agent\nmodel: gpt-4o\ntools: Read, Edit\n---\nOther instructions';
+  const unknownOut = toCursorAgent(unknownAgent);
+  assert.match(unknownOut, /^model: inherit$/m);
+
+  const noModelAgent = '---\nname: no-model-agent\ntools: Read, Edit\n---\nNo model instructions';
+  const noModelOut = toCursorAgent(noModelAgent);
+  assert.match(noModelOut, /^model: inherit$/m);
+});
+
+test('all 23 .cursor/agents/*.md files match toCursorAgent(agents/*.md)', () => {
+  const agentsDir = path.join(ROOT, 'agents');
+  const cursorDir = path.join(ROOT, '.cursor', 'agents');
+  const agentFiles = fs.readdirSync(agentsDir).filter((f) => f.endsWith('.md')).sort();
+  const cursorFiles = fs.readdirSync(cursorDir).filter((f) => f.endsWith('.md')).sort();
+
+  assert.equal(agentFiles.length, 23);
+  assert.deepEqual(cursorFiles, agentFiles);
+
+  for (const file of agentFiles) {
+    const src = fs.readFileSync(path.join(agentsDir, file), 'utf8');
+    const expected = toCursorAgent(src);
+    const actual = fs.readFileSync(path.join(cursorDir, file), 'utf8');
+    assert.equal(actual, expected, `Mismatch in .cursor/agents/${file}`);
+  }
+});
+
 test('init ship-crew installs agents, commands, and .shipcrew templates', () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'shipcrew-test-'));
   fs.writeFileSync(path.join(dir, 'package.json'), JSON.stringify({ name: 'demo', dependencies: { next: '15' } }));
